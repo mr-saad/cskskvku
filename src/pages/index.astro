@@ -1,0 +1,106 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title="Department of Computer Science">
+  <header class="bg">
+    <div class="container text-center">
+      <h1>Department of Computer Science</h1>
+      <p style="margin-bottom: 1.5rem;">
+        Krantiguru Shyamji Krishna Verma Kachchh University
+      </p>
+      <a href="#programs">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="44"
+          height="44"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
+        >
+      </a>
+    </div>
+  </header>
+  <div id="programs" class="container">
+    <h2 class="text-center">Programs We Offer</h2>
+    <div class="grid">
+      <div class="course">
+        <h3>MSC (CA-IT)</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam facilis
+          voluptatem tenetur cupiditate consectetur provident nulla, natus illo?
+          Quos, libero. Lorem ipsum dolor sit amet consectetur, adipisicing
+          elit. Cum cumque exercitationem labore! Culpa, qui fuga libero quaerat
+          distinctio harum laboriosam.
+        </p>
+        <a class="btn" href="/programs">Know More</a>
+      </div>
+      <div class="course">
+        <h3>MSC (IT)</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam facilis
+          voluptatem tenetur cupiditate consectetur provident nulla, natus illo?
+          Quos, libero. Lorem ipsum dolor sit amet consectetur, adipisicing
+          elit. Cum cumque exercitationem labore! Culpa, qui fuga libero quaerat
+          distinctio harum laboriosam.
+        </p>
+        <a class="btn" href="/programs">Know More</a>
+      </div>
+      <div class="course">
+        <h3>PGDCA</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam facilis
+          voluptatem tenetur cupiditate consectetur provident nulla, natus illo?
+          Quos, libero. Lorem ipsum dolor sit amet consectetur, adipisicing
+          elit. Cum cumque exercitationem labore! Culpa, qui fuga libero quaerat
+          distinctio harum laboriosam.
+        </p>
+        <a class="btn" href="/programs">Know More</a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  header {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 5rem;
+  }
+  .container {
+    scroll-margin: 1rem;
+  }
+  header > .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 95vh;
+    color: #fff;
+  }
+  header a {
+    color: #fff;
+  }
+  .grid {
+    margin-block: 2rem;
+    gap: 3rem;
+  }
+  .course {
+    padding: 1.5rem;
+    border-radius: 0.3rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+  }
+  .course:hover {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  }
+  .course .btn {
+    margin-top: 1rem;
+  }
+</style>

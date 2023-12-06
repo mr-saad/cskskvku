@@ -1,0 +1,120 @@
+---
+const { pathname } = new URL(Astro.url)
+---
+
+<nav>
+  <div class="container">
+    <a aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
+      ><img height="50" width="50" src="images/logo.png" alt="KSKVKU Logo" /></a
+    >
+    <div class="hamburger">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><line x1="4" x2="20" y1="12" y2="12"></line><line
+          x1="4"
+          x2="20"
+          y1="6"
+          y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
+      >
+    </div>
+    <ul>
+      <li><a class=`${pathname==="/"&&"active"}` href="/">Home</a></li>
+      <li>
+        <a class=`${pathname==="/about"&&"active"}` href="/about">About</a>
+      </li>
+      <li>
+        <a class=`${pathname==="/programs"&&"active"}` href="/programs"
+          >Programs</a
+        >
+      </li>
+      <li>
+        <a class=`${pathname==="/facilities"&&"active"}` href="/facilities"
+          >Facilities</a
+        >
+      </li>
+      <li>
+        <a class=`${pathname==="/contact"&&"active"}` href="/contact">Contact</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  nav {
+    padding-block: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  nav .hamburger {
+    display: none;
+  }
+
+  nav img {
+    display: block;
+  }
+  nav > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  nav ul li {
+    padding: 1rem;
+  }
+  nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    opacity: 0.6;
+  }
+  nav ul li a.active {
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    nav {
+      position: relative;
+    }
+    nav .hamburger {
+      display: block;
+      position: relative;
+    }
+
+    nav ul {
+      position: absolute;
+      flex-direction: column;
+      background: #fff;
+      width: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      left: 0;
+      top: 100%;
+      visibility: hidden;
+      position: none;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    nav ul.active {
+      visibility: visible;
+      pointer-events: all;
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  document.querySelector<HTMLOrSVGImageElement>(".hamburger").onclick = () => {
+    document
+      .querySelector<HTMLUListElement>("nav ul")
+      .classList.toggle("active")
+  }
+</script>
