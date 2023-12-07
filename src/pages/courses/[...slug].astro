@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from "astro"
+import Layout from "../../layouts/Layout.astro"
+import { xata } from "../../xata"
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return (
+    await xata.db.Courses.select(["Slug", "Name", "Syllabus"]).getAll()
+  ).map(({ Slug, Name, Syllabus }) => ({
+    params: { slug: Slug },
+    props: { Name, Syllabus }
+  }))
+}
+const { Name, Syllabus } = Astro.props as {
+  Name: string
+  Syllabus: {
+    semesters: {
+      subjects: {
+        code: string
+        name: string
+      }[]
+    }[]
+  }
+}
+---
+
+<Layout title={Name}>
+  <div style="margin-top: 2rem;min-height: 40vh;" class="container">
+    <h2 class="heading">{Name}</h2>
+    {
+      Syllabus &&
+        Syllabus.semesters.map(({ subjects }, index) => (
+          <divk>
+            <h3>Semester - {index + 1}</h3>
+            {subjects.map(({ code, name }) => (
+              <p>
+                {code} - {name}
+              </p>
+            ))}
+          </divk>
+        ))
+    }
+  </div>
+</Layout>

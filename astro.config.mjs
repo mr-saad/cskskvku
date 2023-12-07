@@ -10,5 +10,7 @@ export default defineConfig({
   devToolbar: {
     enabled: false
   },
-  site: "https://cskskvku.vercel.app"
+  site: "https://cskskvku.vercel.app",
+  output: "static",
+  trailingSlash: "never"
 })

@@ -20,5 +20,7 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+.xata
+.xatarc
 .vscode
 public/images

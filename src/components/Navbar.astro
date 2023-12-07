@@ -1,5 +1,5 @@
 ---
-const { pathname } = new URL(Astro.url)
+const { pathname } = new URL(Astro.url, Astro.site)
 ---
 
 <nav>
@@ -33,6 +33,11 @@ const { pathname } = new URL(Astro.url)
       <li>
         <a class=`${pathname==="/programs"&&"active"}` href="/programs"
           >Programs</a
+        >
+      </li>
+      <li>
+        <a class=`${pathname.includes("/courses")&&"active"}` href="/courses"
+          >Courses</a
         >
       </li>
       <li>
