@@ -21,7 +21,8 @@ const tables = [
     columns: [
       { name: "Title", type: "string", unique: true },
       { name: "Description", type: "text" },
-      { name: "Requirement", type: "text" }
+      { name: "Requirement", type: "text" },
+      { name: "Href", type: "text" }
     ]
   },
   { name: "Peoples", columns: [] }
@@ -52,8 +53,7 @@ export type DatabaseSchema = {
 const DatabaseClient = buildClient()
 
 const defaultOptions = {
-  databaseURL:
-    "https://Saad-Khatri-s-workspace-0qp24m.eu-central-1.xata.sh/db/csdb"
+  databaseURL: import.meta.env.XATA_DATABASE_URL
 }
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {

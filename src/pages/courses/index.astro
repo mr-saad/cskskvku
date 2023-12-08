@@ -7,12 +7,12 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
 
 <Layout title="Courses">
   <div style="min-height: 40vh;margin-top: 2rem;" class="container">
-    <h2 class="heading">Courses</h2>
+    <h2 class="heading">Courses (Syllabus)</h2>
     {
       courses.map(course => {
         return (
           <a class="course" href={`/courses/${course.Slug}`}>
-            <h3>{course.Name}</h3>
+            <span style="font-size: 1.4rem;">&#8618;</span> {course.Name}
           </a>
         )
       })

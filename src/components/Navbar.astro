@@ -1,7 +1,3 @@
----
-const { pathname } = new URL(Astro.url, Astro.site)
----
-
 <nav>
   <div class="container">
     <a aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
@@ -26,27 +22,35 @@ const { pathname } = new URL(Astro.url, Astro.site)
       >
     </div>
     <ul>
-      <li><a class=`${pathname==="/"&&"active"}` href="/">Home</a></li>
       <li>
-        <a class=`${pathname==="/about"&&"active"}` href="/about">About</a>
+        <a class=`${Astro.url.pathname==="/"&&"active"}` href="/">Home</a>
       </li>
       <li>
-        <a class=`${pathname==="/programs"&&"active"}` href="/programs"
-          >Programs</a
+        <a class=`${Astro.url.pathname==="/about"&&"active"}` href="/about"
+          >About</a
         >
       </li>
       <li>
-        <a class=`${pathname.includes("/courses")&&"active"}` href="/courses"
-          >Courses</a
+        <a
+          class=`${Astro.url.pathname.includes("/programs")&&"active"}`
+          href="/programs">Programs</a
         >
       </li>
       <li>
-        <a class=`${pathname==="/facilities"&&"active"}` href="/facilities"
-          >Facilities</a
+        <a
+          class=`${Astro.url.pathname.includes("/courses")&&"active"}`
+          href="/courses">Courses</a
         >
       </li>
       <li>
-        <a class=`${pathname==="/contact"&&"active"}` href="/contact">Contact</a
+        <a
+          class=`${Astro.url.pathname==="/facilities"&&"active"}`
+          href="/facilities">Facilities</a
+        >
+      </li>
+      <li>
+        <a class=`${Astro.url.pathname==="/contact"&&"active"}` href="/contact"
+          >Contact</a
         >
       </li>
     </ul>
@@ -55,8 +59,10 @@ const { pathname } = new URL(Astro.url, Astro.site)
 
 <style>
   nav {
-    padding-block: 0.5rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  nav .container {
+    padding-block: 0.5rem;
   }
   nav .hamburger {
     display: none;
@@ -91,7 +97,7 @@ const { pathname } = new URL(Astro.url, Astro.site)
       position: relative;
     }
     nav .hamburger {
-      display: block;
+      display: flex;
       position: relative;
     }
 

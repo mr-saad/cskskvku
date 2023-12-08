@@ -11,6 +11,5 @@ export default defineConfig({
     enabled: false
   },
   site: "https://cskskvku.vercel.app",
-  output: "static",
-  trailingSlash: "never"
+  output: "static"
 })

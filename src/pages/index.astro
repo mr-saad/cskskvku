@@ -1,12 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import { xata } from "../xata"
+const programs = await xata.db.Programs.select([
+  "Title",
+  "Description",
+  "Href"
+]).getAll()
 ---
 
 <Layout title="Department of Computer Science">
   <header class="bg">
     <div class="container text-center">
       <h1>Department of Computer Science</h1>
-      <p style="margin-bottom: 1.5rem;">
+      <p style="margin-block: .5rem;font-size: 1.2rem;">
         Krantiguru Shyamji Krishna Verma Kachchh University
       </p>
       <a href="#programs">
@@ -27,39 +33,17 @@ import Layout from "../layouts/Layout.astro"
   <div id="programs" class="container">
     <h2 class="text-center">Programs We Offer</h2>
     <div class="grid">
-      <div class="course">
-        <h3>MSC (CA-IT)</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam facilis
-          voluptatem tenetur cupiditate consectetur provident nulla, natus illo?
-          Quos, libero. Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Cum cumque exercitationem labore! Culpa, qui fuga libero quaerat
-          distinctio harum laboriosam.
-        </p>
-        <a class="btn" href="/programs">Know More</a>
-      </div>
-      <div class="course">
-        <h3>MSC (IT)</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam facilis
-          voluptatem tenetur cupiditate consectetur provident nulla, natus illo?
-          Quos, libero. Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Cum cumque exercitationem labore! Culpa, qui fuga libero quaerat
-          distinctio harum laboriosam.
-        </p>
-        <a class="btn" href="/programs">Know More</a>
-      </div>
-      <div class="course">
-        <h3>PGDCA</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam facilis
-          voluptatem tenetur cupiditate consectetur provident nulla, natus illo?
-          Quos, libero. Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Cum cumque exercitationem labore! Culpa, qui fuga libero quaerat
-          distinctio harum laboriosam.
-        </p>
-        <a class="btn" href="/programs">Know More</a>
-      </div>
+      {
+        programs.map(({ Title, Description, Href }) => (
+          <div class="course">
+            <h3>{Title}</h3>
+            <p>{Description}</p>
+            <a class="btn" href={`/programs/#${Href}`}>
+              Know More
+            </a>
+          </div>
+        ))
+      }
     </div>
   </div>
 </Layout>
@@ -91,13 +75,22 @@ import Layout from "../layouts/Layout.astro"
     gap: 3rem;
   }
   .course {
+    display: flex;
+    flex-direction: column;
     padding: 1.5rem;
     border-radius: 0.3rem;
-    background-color: rgba(0, 0, 0, 0.05);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    transition: var(--transition);
+    background-color: rgb(226, 232, 240);
+    box-shadow: 0 0 10px rgb(209, 213, 219);
+  }
+  .course p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
   }
   .course .btn {
+    align-self: start;
     margin-top: 1rem;
   }
 </style>

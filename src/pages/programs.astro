@@ -3,10 +3,10 @@ import Layout from "../layouts/Layout.astro"
 import { xata } from "../xata"
 
 const programs = await xata.db.Programs.select([
-  "id",
   "Title",
   "Description",
-  "Requirement"
+  "Requirement",
+  "Href"
 ]).getAll()
 ---
 
@@ -15,14 +15,12 @@ const programs = await xata.db.Programs.select([
     <h2 class="heading">Programs Offered</h2>
 
     {
-      programs.map(program => {
+      programs.map(({ Description, Requirement, Title, Href }) => {
         return (
-          <div style="margin-bottom: 1.5rem;">
-            <h3>{program.Title}</h3>
-            <p>{program.Description}</p>
-            <p style="white-space: pre-line;margin-top: 1rem;">
-              {program.Requirement}
-            </p>
+          <div id={Href} style="margin-bottom: 1.5rem;">
+            <h3>{Title}</h3>
+            <p>{Description}</p>
+            <p style="white-space: pre-line;margin-top: 1rem;">{Requirement}</p>
           </div>
         )
       })
