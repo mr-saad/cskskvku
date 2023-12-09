@@ -30,7 +30,7 @@ const { Name, Syllabus } = Astro.props as {
     {
       Syllabus &&
         Syllabus.semesters.map(({ subjects }, index) => (
-          <div>
+          <div style="margin-top: 1rem;">
             <h3>Semester - {index + 1}</h3>
             {subjects.map(({ code, name }) => (
               <p style="display: flex; gap: 0.3rem;">

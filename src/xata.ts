@@ -25,7 +25,28 @@ const tables = [
       { name: "Href", type: "text" }
     ]
   },
-  { name: "Peoples", columns: [] }
+  {
+    name: "Peoples",
+    columns: [
+      {
+        name: "Name",
+        type: "string",
+        unique: true
+      },
+      {
+        name: "Designation",
+        type: "string"
+      },
+      {
+        name: "Courses_Summer",
+        type: "string"
+      },
+      {
+        name: "Courses_Winter",
+        type: "string"
+      }
+    ]
+  }
 ] as const
 
 export type SchemaTables = typeof tables

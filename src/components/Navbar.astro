@@ -1,8 +1,7 @@
 <nav>
-  {Astro.url.pathname}
   <div class="container">
     <a aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
-      ><img height="50" width="50" src="/logo.png" alt="KSKVKU Logo" /></a
+      ><img width="300" src="/logo_kskvku_new.webp" alt="KSKVKU Logo" /></a
     >
     <div class="hamburger">
       <svg
@@ -50,8 +49,18 @@
         >
       </li>
       <li>
+        <a class=`${Astro.url.pathname==="/peoples/"&&"active"}` href="/peoples"
+          >Peoples</a
+        >
+      </li>
+      <li>
         <a class=`${Astro.url.pathname==="/contact/"&&"active"}` href="/contact"
           >Contact</a
+        >
+      </li>
+      <li>
+        <a class=`${Astro.url.pathname==="/blogs/"&&"active"}` href="/blogs"
+          >Blogs</a
         >
       </li>
     </ul>
