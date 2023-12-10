@@ -28,6 +28,7 @@ html {
 .heading {
   border-bottom: 1px solid;
   margin-bottom: 1rem;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .text-center {
@@ -39,17 +40,17 @@ html {
   line-height: 1;
   background-color: #000;
   color: #fff;
-  border-radius: 0.3rem;
   -webkit-border-radius: 0.3rem;
   -moz-border-radius: 0.3rem;
   -ms-border-radius: 0.3rem;
   -o-border-radius: 0.3rem;
+  border-radius: 0.3rem;
   text-decoration: none;
-  transition: var(--transition);
   -webkit-transition: var(--transition);
   -moz-transition: var(--transition);
   -ms-transition: var(--transition);
   -o-transition: var(--transition);
+  transition: var(--transition);
   border: 1px solid #000;
 }
 .btn:hover {

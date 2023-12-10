@@ -1,7 +1,12 @@
 <nav>
   <div class="container">
     <a aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
-      ><img width="300" src="/logo_kskvku_new.webp" alt="KSKVKU Logo" /></a
+      ><img
+        width="250"
+        height="31"
+        src="/logo_kskvku_new.webp"
+        alt="KSKVKU Logo"
+      /></a
     >
     <div class="hamburger">
       <svg
@@ -21,14 +26,9 @@
           y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
       >
     </div>
-    <ul>
+    <ul class="navUl">
       <li>
         <a class=`${Astro.url.pathname==="/"&&"active"}` href="/">Home</a>
-      </li>
-      <li>
-        <a class=`${Astro.url.pathname==="/about/"&&"active"}` href="/about"
-          >About</a
-        >
       </li>
       <li>
         <a
@@ -49,19 +49,41 @@
         >
       </li>
       <li>
-        <a class=`${Astro.url.pathname==="/peoples/"&&"active"}` href="/peoples"
-          >Peoples</a
-        >
-      </li>
-      <li>
-        <a class=`${Astro.url.pathname==="/contact/"&&"active"}` href="/contact"
-          >Contact</a
-        >
-      </li>
-      <li>
         <a class=`${Astro.url.pathname==="/blogs/"&&"active"}` href="/blogs"
           >Blogs</a
         >
+      </li>
+      <li class="drop-wrapper">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
+        >
+        <ul class="dropdown">
+          <li>
+            <a
+              class=`${Astro.url.pathname==="/peoples/"&&"active"}`
+              href="/peoples">Peoples</a
+            >
+          </li>
+          <li>
+            <a class=`${Astro.url.pathname==="/about/"&&"active"}` href="/about"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              class=`${Astro.url.pathname==="/contact/"&&"active"}`
+              href="/contact">Contact</a
+            >
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -72,35 +94,61 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
   nav .container {
-    padding-block: 0.5rem;
+    padding-block: 1rem;
+  }
+  nav img {
+    width: 350px;
+    height: auto;
   }
   nav .hamburger {
     display: none;
-  }
-
-  nav img {
-    display: block;
   }
   nav > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  nav ul {
+  nav .navUl {
     display: flex;
     list-style: none;
   }
-  nav ul li {
-    padding: 1rem;
-  }
   nav ul li a {
+    padding: 0.5rem 1rem;
     text-decoration: none;
     color: black;
     font-weight: bold;
     opacity: 0.6;
+    transition: var(--transition);
   }
-  nav ul li a.active {
+  nav ul li a.active,
+  nav ul li a:hover {
     opacity: 1;
+  }
+
+  .drop-wrapper {
+    position: relative;
+    cursor: pointer;
+  }
+  .drop-wrapper svg {
+    vertical-align: middle;
+  }
+  .drop-wrapper:hover .dropdown {
+    visibility: visible;
+    pointer-events: all;
+    opacity: 1;
+  }
+  .dropdown {
+    position: absolute;
+    right: 0;
+    background: #fff;
+    list-style: none;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: var(--transition);
+  }
+  .dropdown a {
+    display: block;
   }
   @media (max-width: 768px) {
     nav {
@@ -111,23 +159,50 @@
       position: relative;
     }
 
-    nav ul {
+    nav .navUl {
       position: absolute;
       flex-direction: column;
       background: #fff;
       width: 100%;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-block: 1px solid rgba(0, 0, 0, 0.2);
       left: 0;
       top: 100%;
       visibility: hidden;
-      position: none;
+      pointer-events: none;
       opacity: 0;
       transition: var(--transition);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
-    nav ul.active {
+    nav .navUl.active {
       visibility: visible;
       pointer-events: all;
       opacity: 1;
+      z-index: 2;
+    }
+    nav ul li a {
+      display: block;
+    }
+
+    nav .navUl .drop-wrapper {
+      padding: 0;
+      cursor: none;
+    }
+
+    .drop-wrapper svg {
+      display: none;
+    }
+    .dropdown {
+      position: static;
+      visibility: visible;
+      opacity: 1;
+    }
+    .navUl.active .dropdown {
+      pointer-events: all;
+    }
+  }
+  @media (max-width: 914px) {
+    .container img {
+      max-width: 250px;
     }
   }
 </style>
