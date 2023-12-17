@@ -11,6 +11,18 @@ import "../globals.css"
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{Astro.props.title} | KSKV Kachchh University</title>
+    <script is:inline>
+      const theme = localStorage.getItem("theme")
+      theme === "dark" ? document.documentElement.classList.add("dark") : null
+    </script>
+    <script>
+      const theme = localStorage.getItem("theme")
+      theme === "dark"
+        ? document
+            .querySelector<HTMLDivElement>(".theme .inner")
+            .classList.add("dark")
+        : null
+    </script>
     <link
       rel="preload"
       type="image/webp"

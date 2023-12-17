@@ -1,0 +1,42 @@
+---
+import Layout from "../../layouts/Layout.astro"
+const blogs = await Astro.glob("./*.md")
+---
+
+<Layout title="Blogs">
+  <div style="margin-top: 2rem;" class="container">
+    <h2 class="heading">Blogs</h2>
+    {
+      blogs.map(({ frontmatter, url }) => (
+        <a href={url} class="blog">
+          <h3>{frontmatter.title}</h3>
+          <p class="date">{frontmatter.date}</p>
+          <p class="description">{frontmatter.description}</p>
+        </a>
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  .blog {
+    display: block;
+    text-decoration: none;
+    color: currentColor;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog:hover {
+    color: var(--accent);
+  }
+  .blog .date {
+    font-size: small;
+  }
+  .blog .description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+</style>

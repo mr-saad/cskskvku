@@ -31,7 +31,7 @@ const programs = await xata.db.Programs.select([
     </div>
   </header>
   <div id="programs" class="container">
-    <h2 class="text-center">Programs We Offer</h2>
+    <h2 class="heading">Programs We Offer</h2>
     <div class="grid">
       {
         programs.map(({ Title, Description, Href }) => (
@@ -64,7 +64,8 @@ const programs = await xata.db.Programs.select([
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 95vh;
+    min-height: 91vh;
+    min-height: 91dvh;
     color: #fff;
   }
   header a {
@@ -80,7 +81,13 @@ const programs = await xata.db.Programs.select([
     padding: 1.5rem;
     border-radius: 0.3rem;
     background-color: rgb(226, 232, 240);
-    box-shadow: 0 0 10px rgb(209, 213, 219);
+    box-shadow: 0 5px 20px var(--box-shadow);
+  }
+  html.dark .course {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .course h3 {
+    color: var(--accent);
   }
   .course p {
     display: -webkit-box;

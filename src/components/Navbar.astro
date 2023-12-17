@@ -1,15 +1,54 @@
 <nav>
   <div class="container">
-    <a aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
+    <a class="cs-logo" aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
       ><img
-        width="250"
+        style="vertical-align: middle;"
+        width="350"
         height="31"
         src="/logo_kskvku_new.webp"
         alt="KSKVKU Logo"
-      /></a
-    >
+        class="black"
+      /><img
+        style="vertical-align: middle;"
+        width="350"
+        height="31"
+        src="/logo_kskvku_new_white.webp"
+        alt="KSKVKU Logo"
+        class="white"
+      />
+    </a>
+    <div class="theme">
+      <div class="inner">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#fff"
+          stroke="#fff"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="sun"
+          ><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path
+            d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path
+            d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path
+            d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path
+            d="m19.07 4.93-1.41 1.41"></path></svg
+        >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#000"
+          class="moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
+        >
+      </div>
+    </div>
     <div class="hamburger">
       <svg
+        class="linesSvg"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -24,6 +63,19 @@
           x2="20"
           y1="6"
           y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
+      >
+      <svg
+        class="crossSvg"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
       >
     </div>
     <ul class="navUl">
@@ -90,8 +142,53 @@
 </nav>
 
 <style>
+  .cs-logo {
+    position: relative;
+    width: 350px;
+    height: 45px;
+    margin-right: 0.3rem;
+  }
+  .cs-logo img {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: var(--transition);
+  }
+  html .cs-logo img.white,
+  html.dark .cs-logo img.black {
+    visibility: hidden;
+    opacity: 0;
+  }
+  html.dark .cs-logo img.white {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .theme {
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 0.3rem;
+    display: flex;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+  }
+  .theme .inner {
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    transition: var(--transition);
+  }
+  .theme .inner.dark {
+    top: 110%;
+  }
+
   nav {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--border);
   }
   nav .container {
     padding-block: 1rem;
@@ -100,8 +197,11 @@
     width: 350px;
     height: auto;
   }
-  nav .hamburger {
+  .hamburger {
     display: none;
+  }
+  html.dark nav .hamburger svg {
+    stroke: #fff;
   }
   nav > div {
     display: flex;
@@ -115,63 +215,89 @@
   nav ul li a {
     padding: 0.5rem 1rem;
     text-decoration: none;
-    color: black;
+    color: currentColor;
     font-weight: bold;
-    opacity: 0.6;
+    opacity: 0.8;
+
     transition: var(--transition);
   }
   nav ul li a.active,
   nav ul li a:hover {
+    color: var(--accent);
     opacity: 1;
   }
 
   .drop-wrapper {
+    padding-left: 1rem;
     position: relative;
     cursor: pointer;
   }
   .drop-wrapper svg {
     vertical-align: middle;
+    stroke: var(--accent);
+  }
+  .dropdown {
+    border-radius: 0.3rem;
+    position: absolute;
+    width: 20rem;
+    border: 1px solid var(--border);
+    top: 102%;
+    right: 0;
+    background-color: var(--bg);
+    list-style: none;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: var(--transition);
+    box-shadow: 0 10px 20px var(--box-shadow);
   }
   .drop-wrapper:hover .dropdown {
     visibility: visible;
     pointer-events: all;
     opacity: 1;
   }
-  .dropdown {
-    position: absolute;
-    right: 0;
-    background: #fff;
-    list-style: none;
-    visibility: hidden;
-    pointer-events: none;
-    opacity: 0;
-    transition: var(--transition);
-  }
   .dropdown a {
     display: block;
   }
+
   @media (max-width: 768px) {
     nav {
       position: relative;
     }
-    nav .hamburger {
+    .hamburger {
       display: flex;
       position: relative;
+      width: 24px;
+      height: 24px;
     }
-
+    .hamburger svg {
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
+    .crossSvg {
+      visibility: hidden;
+    }
+    .hamburger.active .crossSvg {
+      visibility: visible;
+    }
+    .hamburger.active .linesSvg {
+      visibility: hidden;
+    }
     nav .navUl {
       position: absolute;
       flex-direction: column;
-      background: #fff;
+      background-color: var(--bg);
       width: 100%;
-      border-block: 1px solid rgba(0, 0, 0, 0.2);
+      border-block: 1px solid var(--border);
       left: 0;
       top: 100%;
       visibility: hidden;
       pointer-events: none;
       opacity: 0;
       transition: var(--transition);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 20px var(--box-shadow);
+      padding-block: 0.5rem;
     }
     nav .navUl.active {
       visibility: visible;
@@ -183,11 +309,10 @@
       display: block;
     }
 
-    nav .navUl .drop-wrapper {
+    .drop-wrapper {
       padding: 0;
       cursor: none;
     }
-
     .drop-wrapper svg {
       display: none;
     }
@@ -195,22 +320,50 @@
       position: static;
       visibility: visible;
       opacity: 1;
+      border: none;
+      box-shadow: none;
+      width: 100%;
+    }
+    html.dark .dropdown {
+      border: none;
+      box-shadow: none;
     }
     .navUl.active .dropdown {
       pointer-events: all;
     }
   }
   @media (max-width: 914px) {
-    .container img {
+    .cs-logo {
       max-width: 250px;
+      max-height: 31px;
     }
   }
 </style>
 
 <script>
-  document.querySelector<HTMLOrSVGImageElement>(".hamburger").onclick = () => {
+  document.querySelector<HTMLOrSVGImageElement>(".hamburger").onclick =
+    function () {
+      this.classList.toggle("active")
+      document
+        .querySelector<HTMLUListElement>("nav ul")
+        .classList.toggle("active")
+    }
+
+  //sun
+  document.querySelector<HTMLOrSVGImageElement>(".sun").onclick = e => {
+    document.documentElement.classList.remove("dark")
     document
-      .querySelector<HTMLUListElement>("nav ul")
-      .classList.toggle("active")
+      .querySelector<HTMLDivElement>(".theme .inner")
+      .classList.remove("dark")
+    localStorage.setItem("theme", "light")
+  }
+
+  //moon
+  document.querySelector<HTMLOrSVGImageElement>(".moon").onclick = e => {
+    document.documentElement.classList.add("dark")
+    document
+      .querySelector<HTMLDivElement>(".theme .inner")
+      .classList.add("dark")
+    localStorage.setItem("theme", "dark")
   }
 </script>

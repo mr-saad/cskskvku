@@ -9,10 +9,10 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
   <div style="margin-top: 2rem;" class="container">
     <h2 class="heading">Courses (Syllabus)</h2>
     {
-      courses.map(course => {
+      courses.map((course, index) => {
         return (
           <a class="course" href={`/courses/${course.Slug}`}>
-            <span style="font-size: 1.4rem;">&#8618;</span> {course.Name}
+            {index + 1 + ")"} {course.Name}
           </a>
         )
       })
@@ -21,9 +21,13 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
 </Layout>
 <style>
   .course {
-    text-decoration: none;
-    color: #000;
     display: block;
-    margin-block: 1rem;
+    text-decoration: none;
+    color: currentColor;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+  }
+  .course:hover {
+    color: var(--accent);
   }
 </style>

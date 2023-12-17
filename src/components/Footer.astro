@@ -27,7 +27,7 @@
       </div>
       <div>
         <h3>Address</h3>
-        <p class="neutral">
+        <p>
           Department of Computer Science, KSKV Kachchh University, Mundra Road,
           Bhuj-Kachchh, Gujarat - 370001
         </p>
@@ -35,7 +35,7 @@
     </div>
     <hr />
 
-    <p class="neutral text-center">
+    <p class="text-center">
       &copy; {new Date().getFullYear()} Department of Computer Science, KSKV
       Kachchh University.
     </p>
@@ -83,34 +83,33 @@
 </footer>
 <style>
   footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     margin-top: 5rem;
-    background: #000;
-    color: #fff;
+    background: rgb(15, 15, 15);
     padding-block: 3rem;
+    color: #888;
   }
   footer .grid {
     gap: 3rem;
   }
-
+  footer h3 {
+    color: #fff;
+  }
   footer ul {
     list-style: none;
   }
   footer hr {
     margin-block: 2rem;
-    opacity: 0.6;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
   footer a {
-    opacity: 0.6;
+    color: currentColor;
     text-decoration: none;
     color: currentColor;
     transition: var(--transition);
   }
   footer a:hover {
-    opacity: 1;
-  }
-  .neutral {
-    opacity: 0.6;
+    color: #fff;
   }
   .socials {
     display: flex;
@@ -119,10 +118,9 @@
     margin-top: 1rem;
   }
   .socials > * {
-    opacity: 0.6;
     transition: var(--transition);
   }
   .socials > *:hover {
-    opacity: 1;
+    color: #fff;
   }
 </style>
