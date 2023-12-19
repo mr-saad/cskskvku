@@ -8,7 +8,7 @@
   text-wrap: balance;
 }
 :root {
-  --transition: 100ms ease;
+  --transition: 200ms ease;
   --padding: 3rem;
   --bg: rgb(255, 255, 255); /* dark 15,15,15 */
   --accent: #000; /* dark #fff */
@@ -33,9 +33,6 @@ html body {
   background-color: var(--bg);
   transition: background-color var(--transition), color var(--transition);
   color: var(--accent-body);
-}
-
-html main {
 }
 
 .container {

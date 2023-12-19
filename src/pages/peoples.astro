@@ -45,40 +45,42 @@ const admin_staff = data.filter(
         }
       </table>
     </div>
-    <table style="margin-block: 2rem;" border="1">
-      <tr>
-        <th colspan="3">Members of The Technical Staff</th>
-      </tr>
-      <tr>
-        <th>Name</th>
-        <th>Designation</th>
-      </tr>
-      {
-        tech_staff.map(({ Name, Designation }, index) => (
-          <tr>
-            <td>{Name}</td>
-            <td>{Designation}</td>
-          </tr>
-        ))
-      }
-    </table>
-    <table border="1">
-      <tr>
-        <th colspan="3">Members of The Administrative Staff</th>
-      </tr>
-      <tr>
-        <th>Name</th>
-        <th>Designation</th>
-      </tr>
-      {
-        admin_staff.map(({ Name, Designation }, index) => (
-          <tr>
-            <td>{Name}</td>
-            <td>{Designation}</td>
-          </tr>
-        ))
-      }
-    </table>
+    <div class="row">
+      <table border="1">
+        <tr>
+          <th colspan="3">Members of The Technical Staff</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th>Designation</th>
+        </tr>
+        {
+          tech_staff.map(({ Name, Designation }, index) => (
+            <tr>
+              <td>{Name}</td>
+              <td>{Designation}</td>
+            </tr>
+          ))
+        }
+      </table>
+      <table border="1">
+        <tr>
+          <th colspan="3">Members of The Administrative Staff</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th>Designation</th>
+        </tr>
+        {
+          admin_staff.map(({ Name, Designation }, index) => (
+            <tr>
+              <td>{Name}</td>
+              <td>{Designation}</td>
+            </tr>
+          ))
+        }
+      </table>
+    </div>
   </div>
 </Layout>
 
@@ -101,5 +103,15 @@ const admin_staff = data.filter(
     padding: 1rem;
     line-height: 1;
     text-align: center;
+  }
+  .row {
+    display: flex;
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+  @media (max-width: 560px) {
+    .row {
+      flex-direction: column;
+    }
   }
 </style>

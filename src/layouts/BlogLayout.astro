@@ -2,7 +2,8 @@
 import Footer from "../components/Footer.astro"
 import Navbar from "../components/Navbar.astro"
 import "../globals.css"
-const { frontmatter } = Astro.props
+import { URL } from "./Layout.astro"
+const { frontmatter, url } = Astro.props
 ---
 
 <!doctype html>
@@ -23,26 +24,33 @@ const { frontmatter } = Astro.props
             .classList.add("dark")
         : null
     </script>
+    <link slot="canonical" rel="canonical" href={Astro.url} />
   </head>
   <body>
     <Navbar />
     <main style="min-height: 85vh;">
       <div style="margin-top: 2rem;" class="container blog_container">
         <h2 class="heading">{frontmatter.title}</h2>
-        <slot />
+        <p style="font-size: small;">{frontmatter.date}</p>
+        <p>{frontmatter.description}</p>
+
+        <div class="content">
+          <slot />
+        </div>
       </div>
     </main>
     <Footer />
-  </body>
+  </body><style is:global>
+    .blog_container h1,
+    .blog_container h2,
+    .blog_container h3,
+    .blog_container h4,
+    .blog_container h5,
+    .blog_container h6 {
+      color: var(--accent);
+    }
+    .content {
+      margin-top: 1rem;
+    }
+  </style>
 </html>
-
-<style is:global>
-  .blog_container h1,
-  .blog_container h2,
-  .blog_container h3,
-  .blog_container h4,
-  .blog_container h5,
-  .blog_container h6 {
-    color: var(--accent);
-  }
-</style>

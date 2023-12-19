@@ -2,6 +2,7 @@
 import Navbar from "../components/Navbar.astro"
 import Footer from "../components/Footer.astro"
 import "../globals.css"
+export const URL = "https://cskskvku.vercel.app"
 ---
 
 <html lang="en">
@@ -29,6 +30,8 @@ import "../globals.css"
       as="image"
       href="/logo_kskvku_new.webp"
     />
+    <link slot="canonical" rel="canonical" href={Astro.url} />
+    <slot name="homeBg" />
   </head>
   <body>
     <Navbar />

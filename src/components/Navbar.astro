@@ -48,7 +48,6 @@
     </div>
     <div class="hamburger">
       <svg
-        class="linesSvg"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -58,25 +57,10 @@
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        ><line x1="4" x2="20" y1="12" y2="12"></line><line
-          x1="4"
-          x2="20"
-          y1="6"
-          y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
       >
-      <svg
-        class="crossSvg"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
-      >
+        <line x1="4" x2="20" y1="10" y2="10"></line>
+        <line x1="4" x2="20" y1="16" y2="16"></line>
+      </svg>
     </div>
     <ul class="navUl">
       <li>
@@ -250,6 +234,7 @@
     opacity: 0;
     transition: var(--transition);
     box-shadow: 0 10px 20px var(--box-shadow);
+    padding-block: 0.5rem;
   }
   .drop-wrapper:hover .dropdown {
     visibility: visible;
@@ -266,24 +251,23 @@
     }
     .hamburger {
       display: flex;
-      position: relative;
-      width: 24px;
-      height: 24px;
     }
-    .hamburger svg {
-      top: 0;
-      left: 0;
-      position: absolute;
+    .hamburger svg line {
+      transition: var(--transition);
     }
-    .crossSvg {
-      visibility: hidden;
+    .hamburger svg line:nth-child(1) {
+      transform-origin: center;
     }
-    .hamburger.active .crossSvg {
-      visibility: visible;
+    .hamburger svg line:nth-child(2) {
+      transform-origin: left;
     }
-    .hamburger.active .linesSvg {
-      visibility: hidden;
+    .hamburger.active svg line:nth-child(1) {
+      transform: rotate(45deg) translate(0, 0);
     }
+    .hamburger.active svg line:nth-child(2) {
+      transform: rotate(-45deg) translate(-1.8px, 4.2px);
+    }
+
     nav .navUl {
       position: absolute;
       flex-direction: column;
@@ -341,13 +325,13 @@
 </style>
 
 <script>
-  document.querySelector<HTMLOrSVGImageElement>(".hamburger").onclick =
-    function () {
-      this.classList.toggle("active")
-      document
-        .querySelector<HTMLUListElement>("nav ul")
-        .classList.toggle("active")
-    }
+  const ham = document.querySelector<HTMLDivElement>(".hamburger")
+  ham.onclick = () => {
+    ham.classList.toggle("active")
+    document
+      .querySelector<HTMLUListElement>("nav ul")
+      .classList.toggle("active")
+  }
 
   //sun
   document.querySelector<HTMLOrSVGImageElement>(".sun").onclick = e => {

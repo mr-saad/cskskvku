@@ -9,6 +9,13 @@ const programs = await xata.db.Programs.select([
 ---
 
 <Layout title="Department of Computer Science">
+  <link
+    slot="homeBg"
+    rel="preload"
+    type="image/webp"
+    as="image"
+    href="/bg.webp"
+  />
   <header class="bg">
     <div class="container text-center">
       <h1 style="line-height: 1;">Department of Computer Science</h1>
@@ -64,8 +71,7 @@ const programs = await xata.db.Programs.select([
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 91vh;
-    min-height: 91dvh;
+    min-height: 95vh;
     color: #fff;
   }
   header a {
