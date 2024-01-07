@@ -11,11 +11,55 @@ export const URL = "https://cskskvku.vercel.app"
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{Astro.props.title} | KSKV Kachchh University</title>
+    <meta
+      name="keywords"
+      content="computer science, department, kskv, kskvku, kachchh university, msc ca it, msc it, pgdca, kachchh, university, it career, information technology, Master of Computer Science, post graduate diploma, integrated course, cskskvku.vercel.app"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="English" />
+    <meta name="author" content="Saad Khatri" />
     <meta
       name="google-site-verification"
       content="lBrFwP_GaamILlVDGRzoEvN5aWFGrX0sKu5zttr_T7c"
     />
+    <meta
+      name="title"
+      content={`${Astro.props.title} | KSKV Kachchh University`}
+    />
+    <meta
+      name="description"
+      content={`${
+        Astro.request.url !== "/" && Astro.props.title + " | "
+      }Department of Computer Science KSKV Kachchh University`}
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta
+      property="og:title"
+      content={`${Astro.props.title} | KSKV Kachchh University`}
+    />
+    <meta
+      property="og:description"
+      content={`${
+        Astro.request.url !== "/" && Astro.props.title + " | "
+      }Department of Computer Science KSKV Kachchh University`}
+    />
+    <meta property="og:image" content="/home_sc.jpg" />
+    <meta property="twitter:card" content="/home_sc.jpg" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta
+      property="twitter:title"
+      content={`${Astro.props.title} | KSKV Kachchh University`}
+    />
+    <meta
+      property="twitter:description"
+      content={`${
+        Astro.request.url !== "/" && Astro.props.title + " | "
+      }Department of Computer Science KSKV Kachchh University`}
+    />
+    <meta property="twitter:image" content="/home_sc.jpg" />
+    <title>{Astro.props.title} | KSKV Kachchh University</title>
     <script is:inline>
       const theme = localStorage.getItem("theme")
       theme === "dark" ? document.documentElement.classList.add("dark") : null
@@ -34,7 +78,13 @@ export const URL = "https://cskskvku.vercel.app"
       as="image"
       href="/logo_kskvku_new.webp"
     />
-    <link slot="canonical" rel="canonical" href={Astro.url} />
+    <link
+      rel="preload"
+      type="image/webp"
+      as="image"
+      href="/logo_kskvku_new_white.webp"
+    />
+    <link rel="canonical" href={Astro.url} />
     <slot name="homeBg" />
   </head>
   <body>

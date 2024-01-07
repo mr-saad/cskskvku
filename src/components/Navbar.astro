@@ -1,15 +1,45 @@
+---
+const navLinks = [
+  {
+    text: "home",
+    href: "/"
+  },
+  {
+    href: "/programs"
+  },
+  {
+    href: "/courses"
+  },
+  {
+    href: "/facilities"
+  },
+  {
+    href: "/blogs"
+  }
+]
+const dropLinks = [
+  {
+    href: "/peoples"
+  },
+  {
+    href: "/about"
+  },
+  {
+    href: "/contact"
+  }
+]
+---
+
 <nav>
   <div class="container">
     <a class="cs-logo" aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
       ><img
-        style="vertical-align: middle;"
         width="350"
         height="31"
         src="/logo_kskvku_new.webp"
         alt="KSKVKU Logo"
         class="black"
       /><img
-        style="vertical-align: middle;"
         width="350"
         height="31"
         src="/logo_kskvku_new_white.webp"
@@ -63,32 +93,22 @@
       </svg>
     </div>
     <ul class="navUl">
-      <li>
-        <a class=`${Astro.url.pathname==="/"&&"active"}` href="/">Home</a>
-      </li>
-      <li>
-        <a
-          class=`${Astro.url.pathname.includes("/programs")&&"active"}`
-          href="/programs">Programs</a
-        >
-      </li>
-      <li>
-        <a
-          class=`${Astro.url.pathname.includes("/courses")&&"active"}`
-          href="/courses">Courses</a
-        >
-      </li>
-      <li>
-        <a
-          class=`${Astro.url.pathname==="/facilities/"&&"active"}`
-          href="/facilities">Facilities</a
-        >
-      </li>
-      <li>
-        <a class=`${Astro.url.pathname==="/blogs/"&&"active"}` href="/blogs"
-          >Blogs</a
-        >
-      </li>
+      {
+        navLinks.map(link => {
+          const text = link?.text || link.href.split("/")[1]
+          return (
+            <li>
+              <a
+                class={Astro.url.pathname === link.href && "active"}
+                href={link.href}
+              >
+                {text}
+              </a>
+            </li>
+          )
+        })
+      }
+
       <li class="drop-wrapper">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -102,23 +122,21 @@
           stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
         >
         <ul class="dropdown">
-          <li>
-            <a
-              class=`${Astro.url.pathname==="/peoples/"&&"active"}`
-              href="/peoples">Peoples</a
-            >
-          </li>
-          <li>
-            <a class=`${Astro.url.pathname==="/about/"&&"active"}` href="/about"
-              >About</a
-            >
-          </li>
-          <li>
-            <a
-              class=`${Astro.url.pathname==="/contact/"&&"active"}`
-              href="/contact">Contact</a
-            >
-          </li>
+          {
+            dropLinks.map(link => {
+              const text = link.href.split("/")[1]
+              return (
+                <li>
+                  <a
+                    class={Astro.url.pathname === link.href && "active"}
+                    href={link.href}
+                  >
+                    {text}
+                  </a>
+                </li>
+              )
+            })
+          }
         </ul>
       </li>
     </ul>
@@ -139,6 +157,8 @@
     width: 100%;
     height: 100%;
     transition: var(--transition);
+    vertical-align: middle;
+    object-fit: contain;
   }
   html .cs-logo img.white,
   html.dark .cs-logo img.black {
@@ -153,22 +173,24 @@
   .theme {
     cursor: pointer;
     margin-left: auto;
-    margin-right: 0.3rem;
-    display: flex;
+    /* display: flex; */
     position: relative;
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 26px;
     overflow: hidden;
+    /* flex-shrink: 0; */
+  }
+  .theme .inner svg {
+    vertical-align: bottom;
   }
   .theme .inner {
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     position: absolute;
+    top: -100%;
+    left: 0;
     transition: var(--transition);
   }
   .theme .inner.dark {
-    top: 110%;
+    top: 0;
   }
 
   nav {
@@ -195,6 +217,7 @@
   nav .navUl {
     display: flex;
     list-style: none;
+    text-transform: capitalize;
   }
   nav ul li a {
     padding: 0.5rem 1rem;
@@ -234,7 +257,7 @@
     opacity: 0;
     transition: var(--transition);
     box-shadow: 0 10px 20px var(--box-shadow);
-    padding-block: 0.5rem;
+    z-index: 2;
   }
   .drop-wrapper:hover .dropdown {
     visibility: visible;
@@ -248,6 +271,9 @@
   @media (max-width: 768px) {
     nav {
       position: relative;
+    }
+    .container {
+      gap: 0.3rem;
     }
     .hamburger {
       display: flex;
@@ -307,10 +333,6 @@
       border: none;
       box-shadow: none;
       width: 100%;
-    }
-    html.dark .dropdown {
-      border: none;
-      box-shadow: none;
     }
     .navUl.active .dropdown {
       pointer-events: all;
