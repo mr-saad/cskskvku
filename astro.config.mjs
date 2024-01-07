@@ -13,6 +13,7 @@ export default defineConfig({
   devToolbar: {
     enabled: false
   },
+  trailingSlash: "always",
   site: "https://cskskvku.vercel.app",
   output: "static"
 })

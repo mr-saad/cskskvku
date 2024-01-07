@@ -1,10 +1,6 @@
 ---
 const navLinks = [
   {
-    text: "home",
-    href: "/"
-  },
-  {
     href: "/programs"
   },
   {
@@ -30,6 +26,7 @@ const dropLinks = [
 ]
 ---
 
+{Astro.url}
 <nav>
   <div class="container">
     <a class="cs-logo" aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
@@ -93,13 +90,16 @@ const dropLinks = [
       </svg>
     </div>
     <ul class="navUl">
+      <li>
+        <a class={Astro.url.pathname === "/" && "active"} href="/"> Home</a>
+      </li>
       {
         navLinks.map(link => {
-          const text = link?.text || link.href.split("/")[1]
+          const text = link.href.split("/")[1]
           return (
             <li>
               <a
-                class={Astro.url.pathname === link.href && "active"}
+                class={Astro.url.pathname.includes(link.href) && "active"}
                 href={link.href}
               >
                 {text}
@@ -128,7 +128,7 @@ const dropLinks = [
               return (
                 <li>
                   <a
-                    class={Astro.url.pathname === link.href && "active"}
+                    class={Astro.url.pathname.includes(link.href) && "active"}
                     href={link.href}
                   >
                     {text}
