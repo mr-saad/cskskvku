@@ -4,7 +4,7 @@ import { xata } from "../xata"
 const programs = await xata.db.Programs.select([
   "Title",
   "Description",
-  "Href"
+  "Href",
 ]).getAll()
 ---
 
@@ -119,6 +119,9 @@ const programs = await xata.db.Programs.select([
   }
   .course p {
     margin-bottom: 0.5rem;
+  }
+  .container {
+    max-width: 80rem;
   }
   @media (max-width: 768px) {
     header.container {

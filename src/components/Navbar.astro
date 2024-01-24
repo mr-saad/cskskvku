@@ -1,28 +1,28 @@
 ---
 const navLinks = [
   {
-    href: "/programs"
+    href: "/programs/",
   },
   {
-    href: "/courses"
+    href: "/courses/",
   },
   {
-    href: "/facilities"
+    href: "/facilities/",
   },
   {
-    href: "/blogs"
-  }
+    href: "/blogs/",
+  },
 ]
 const dropLinks = [
   {
-    href: "/peoples"
+    href: "/peoples/",
   },
   {
-    href: "/about"
+    href: "/about/",
   },
   {
-    href: "/contact"
-  }
+    href: "/contact/",
+  },
 ]
 ---
 
@@ -31,13 +31,13 @@ const dropLinks = [
     <a class="cs-logo" aria-label="KSKVKU" href="/" title="CS-KSKVKU | Home"
       ><img
         width="350"
-        height="31"
+        height="45"
         src="/logo_kskvku_new.webp"
         alt="KSKVKU Logo"
         class="black"
       /><img
         width="350"
-        height="31"
+        height="45"
         src="/logo_kskvku_new_white.webp"
         alt="KSKVKU Logo"
         class="white"
@@ -75,17 +75,17 @@ const dropLinks = [
     <div class="hamburger">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
       >
-        <line x1="4" x2="20" y1="10" y2="10"></line>
-        <line x1="4" x2="20" y1="16" y2="16"></line>
+        <line x1="0" x2="18" y1="4" y2="4"></line>
+        <line x1="0" x2="18" y1="14" y2="14"></line>
       </svg>
     </div>
     <ul class="navUl">
@@ -93,7 +93,7 @@ const dropLinks = [
         <a class={Astro.url.pathname === "/" && "active"} href="/"> Home</a>
       </li>
       {
-        navLinks.map(link => {
+        navLinks.map((link) => {
           const text = link.href.split("/")[1]
           return (
             <li>
@@ -122,7 +122,7 @@ const dropLinks = [
         >
         <ul class="dropdown">
           {
-            dropLinks.map(link => {
+            dropLinks.map((link) => {
               const text = link.href.split("/")[1]
               return (
                 <li>
@@ -147,14 +147,14 @@ const dropLinks = [
     position: relative;
     width: 350px;
     height: 45px;
-    margin-right: 0.3rem;
   }
   .cs-logo img {
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     left: 0;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: auto;
     transition: var(--transition);
     vertical-align: middle;
     object-fit: contain;
@@ -170,26 +170,26 @@ const dropLinks = [
   }
 
   .theme {
-    cursor: pointer;
+    flex-shrink: 0;
     margin-left: auto;
-    /* display: flex; */
+    margin-right: 0.3rem;
     position: relative;
     width: 24px;
     height: 26px;
     overflow: hidden;
-    /* flex-shrink: 0; */
-  }
-  .theme .inner svg {
-    vertical-align: bottom;
   }
   .theme .inner {
     position: absolute;
-    top: -100%;
+    top: -110%;
     left: 0;
     transition: var(--transition);
   }
   .theme .inner.dark {
-    top: 0;
+    top: -1px;
+  }
+  .theme .inner svg {
+    vertical-align: bottom;
+    cursor: pointer;
   }
 
   nav {
@@ -197,10 +197,6 @@ const dropLinks = [
   }
   nav .container {
     padding-block: 1rem;
-  }
-  nav img {
-    width: 350px;
-    height: auto;
   }
   .hamburger {
     display: none;
@@ -213,19 +209,18 @@ const dropLinks = [
     justify-content: space-between;
     align-items: center;
   }
-  nav .navUl {
+  .navUl {
     display: flex;
     list-style: none;
     text-transform: capitalize;
   }
-  nav ul li a {
+  .navUl li a {
     padding: 0.5rem 1rem;
     text-decoration: none;
     color: currentColor;
     font-weight: bold;
     opacity: 0.8;
-
-    transition: var(--transition);
+    transition: color var(--transition);
   }
   nav ul li a.active,
   nav ul li a:hover {
@@ -267,38 +262,54 @@ const dropLinks = [
     display: block;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 990px) {
+    .cs-logo {
+      height: 39px;
+    }
+    .navUl li a {
+      padding: 0.5rem;
+    }
+  }
+  @media (max-width: 786px) {
     nav {
       position: relative;
     }
     .container {
       gap: 0.3rem;
     }
+    .cs-logo {
+      width: 260px;
+    }
     .hamburger {
       display: flex;
+      /* border: 1px solid; */
+    }
+    .hamburger svg {
+      overflow: visible;
     }
     .hamburger svg line {
       transition: var(--transition);
     }
     .hamburger svg line:nth-child(1) {
-      transform-origin: center;
-    }
-    .hamburger svg line:nth-child(2) {
       transform-origin: left;
     }
+    .hamburger svg line:nth-child(2) {
+      transform-origin: left bottom;
+    }
     .hamburger.active svg line:nth-child(1) {
-      transform: rotate(45deg) translate(0, 0);
+      transform: rotate(45deg) translateX(-4.5px);
     }
     .hamburger.active svg line:nth-child(2) {
-      transform: rotate(-45deg) translate(-1.8px, 4.2px);
+      transform: rotate(-45deg) translate(2.5px, 2px);
     }
 
-    nav .navUl {
+    .navUl {
       position: absolute;
       flex-direction: column;
       background-color: var(--bg);
       width: 100%;
-      border-block: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       left: 0;
       top: 100%;
       visibility: hidden;
@@ -308,14 +319,15 @@ const dropLinks = [
       box-shadow: 0 10px 20px var(--box-shadow);
       padding-block: 0.5rem;
     }
-    nav .navUl.active {
+    .navUl.active {
       visibility: visible;
       pointer-events: all;
       opacity: 1;
       z-index: 2;
     }
-    nav ul li a {
+    .navUl li a {
       display: block;
+      padding: 0.5rem 1rem;
     }
 
     .drop-wrapper {
@@ -326,21 +338,15 @@ const dropLinks = [
       display: none;
     }
     .dropdown {
-      position: static;
-      visibility: visible;
-      opacity: 1;
       border: none;
       box-shadow: none;
       width: 100%;
+      position: static;
     }
     .navUl.active .dropdown {
+      visibility: visible;
+      opacity: 1;
       pointer-events: all;
-    }
-  }
-  @media (max-width: 914px) {
-    .cs-logo {
-      max-width: 250px;
-      max-height: 31px;
     }
   }
 </style>
@@ -355,7 +361,7 @@ const dropLinks = [
   }
 
   //sun
-  document.querySelector<HTMLOrSVGImageElement>(".sun").onclick = e => {
+  document.querySelector<HTMLOrSVGImageElement>(".sun").onclick = (e) => {
     document.documentElement.classList.remove("dark")
     document
       .querySelector<HTMLDivElement>(".theme .inner")
@@ -364,7 +370,7 @@ const dropLinks = [
   }
 
   //moon
-  document.querySelector<HTMLOrSVGImageElement>(".moon").onclick = e => {
+  document.querySelector<HTMLOrSVGImageElement>(".moon").onclick = (e) => {
     document.documentElement.classList.add("dark")
     document
       .querySelector<HTMLDivElement>(".theme .inner")
