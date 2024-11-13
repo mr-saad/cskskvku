@@ -2,18 +2,18 @@ import { defineConfig } from "astro/config"
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [],
   experimental: {
-    contentCollectionCache: true
+    contentCollectionCache: true,
   },
   prefetch: {
     defaultStrategy: "viewport",
-    prefetchAll: true
+    prefetchAll: true,
   },
   devToolbar: {
-    enabled: false
+    enabled: false,
   },
   trailingSlash: "always",
   site: "https://cskskvku.vercel.app",
-  output: "static"
+  output: "static",
+  cacheDir: "./cacheDir",
 })

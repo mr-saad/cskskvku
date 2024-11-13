@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets"
 import Layout from "../layouts/Layout.astro"
 import { xata } from "../xata"
+import bg from "../bg.webp"
 const programs = await xata.db.Programs.select([
   "Title",
   "Description",
@@ -14,14 +16,14 @@ const programs = await xata.db.Programs.select([
     rel="preload"
     type="image/webp"
     as="image"
-    href="/bg.webp"
+    href={bg.src}
   />
   <header class="container">
-    <img
-      alt="DOCS Background Image"
+    <Image
+      fetchpriority="high"
       loading="eager"
-      decoding="async"
-      src="bg.webp"
+      alt="Department of Computer Science"
+      src={bg}
     />
     <h1 style="line-height: 1;">Department of Computer Science</h1>
     <p style="margin-block: .5rem;font-size: 1.2rem;">
@@ -50,7 +52,7 @@ const programs = await xata.db.Programs.select([
             <h3>{Title}</h3>
             <p>{Description}</p>
             <a class="btn" href={`/programs/#${Href}`}>
-              Know More
+              Explore
             </a>
           </div>
         ))
@@ -67,7 +69,7 @@ const programs = await xata.db.Programs.select([
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 91vh;
+    height: 90vh;
     color: #fff;
     text-align: center;
     position: relative;
@@ -98,7 +100,6 @@ const programs = await xata.db.Programs.select([
     padding: 1.5rem;
     border-radius: 0.3rem;
     background-color: rgb(0 0 0 / 0.1);
-    box-shadow: 0 5px 20px var(--box-shadow);
   }
   html.dark .course {
     background-color: rgb(255 255 255 / 0.1);
@@ -123,9 +124,9 @@ const programs = await xata.db.Programs.select([
   .container {
     max-width: 80rem;
   }
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     header.container {
       min-height: 85vh;
     }
-  }
+  } */
 </style>

@@ -26,6 +26,9 @@ const blogs = await Astro.glob("./*.md")
     margin-bottom: 1.5rem;
     transition: color var(--transition);
   }
+  .blog h3 {
+    color: var(--accent);
+  }
 
   .blog:hover {
     color: var(--accent);
