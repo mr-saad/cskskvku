@@ -10,9 +10,9 @@
   --transition: 200ms ease;
   --padding: 3rem;
   --bg: rgb(255, 255, 255); /* dark 15,15,15 */
-  --accent: #000; /* dark #fff */
+  --accent: #997752; /* dark #fff */
   --accent-body: #555; /* dark #666 */
-  --border: rgba(0, 0, 0, 0.2);
+  --border: rgba(153, 119, 82, 0.25);
   --box-shadow: rgba(0, 0, 0, 0.1);
 }
 
@@ -23,9 +23,7 @@ html {
 html.dark {
   color-scheme: dark;
   --bg: rgb(15, 15, 15);
-  --accent: #fff;
   --accent-body: #888;
-  --border: rgba(255, 255, 255, 0.2);
   --box-shadow: rgba(255, 255, 255, 0.05);
 }
 html body {
@@ -42,6 +40,10 @@ h6 {
   text-wrap: balance;
 }
 
+p {
+  text-wrap: pretty;
+}
+
 .container {
   max-width: 80rem;
   margin-inline: auto;
@@ -51,7 +53,6 @@ h6 {
 /* utilities */
 
 .heading {
-  border-bottom: 1px solid;
   margin-bottom: 1rem;
   width: -moz-fit-content;
   width: fit-content;
@@ -86,20 +87,12 @@ h6 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1rem;
 }
 
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 @media (max-width: 768px) {
   :root {
     --padding: 1rem;
-  }
-  .grid {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
