@@ -13,7 +13,11 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
         courses.map((course, index) => {
           return (
             <li>
-              <a class="course" href={`/courses/${course.Slug}/`}>
+              <a
+                transition:name={`title_${course.Name}`}
+                class="course"
+                href={`/courses/${course.Slug}/`}
+              >
                 {course.Name}
               </a>
             </li>
@@ -26,6 +30,8 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
 <style>
   .courses {
     padding-left: 1.1rem;
+    list-style: none;
+    padding-left: 0;
   }
   .courses li {
     margin-bottom: 1rem;

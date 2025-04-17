@@ -1,0 +1,56 @@
+<div class="theme">
+  <div class="inner">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="#fff"
+      stroke="#fff"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="sun"
+      ><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path
+        d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path
+        d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path
+        d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path
+        d="m19.07 4.93-1.41 1.41"></path></svg
+    >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="#000"
+      class="moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
+    >
+  </div>
+</div>
+
+<script></script>
+
+<style>
+  .theme {
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 0.3rem;
+    position: relative;
+    width: 24px;
+    height: 26px;
+    overflow: hidden;
+  }
+  .theme .inner {
+    position: absolute;
+    top: -110%;
+    left: 0;
+    transition: var(--transition);
+  }
+  .theme .inner.dark {
+    top: -1px;
+  }
+  .theme .inner svg {
+    vertical-align: bottom;
+    cursor: pointer;
+  }
+</style>
