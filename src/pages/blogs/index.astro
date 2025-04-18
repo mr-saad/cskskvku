@@ -4,7 +4,7 @@ const blogs = await Astro.glob("./*.md")
 ---
 
 <Layout title="Blogs">
-  <div style="margin-top: 2rem;" class="container">
+  <div class="container">
     <h2 class="heading">Blogs</h2>
     {
       blogs.map(({ frontmatter, url }) => (
@@ -27,11 +27,17 @@ const blogs = await Astro.glob("./*.md")
     transition: color var(--transition);
   }
   .blog h3 {
-    color: var(--accent);
+    width: fit-content;
+    color: CanvasText;
+    transition: var(--transition);
   }
 
   .blog:hover {
     color: var(--accent);
+    h3{
+      text-decoration: underline;
+      border-bottom-width: 1px;
+    }
   }
   .blog .date {
     font-size: small;

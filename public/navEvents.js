@@ -1,21 +1,42 @@
+let controller
 const fireEvents = () => {
-  const ham = document.querySelector(".hamburger")
-  ham.addEventListener("click", () => {
-    ham.classList.toggle("active")
-    document.querySelector("nav ul").classList.toggle("active")
-  })
-  document.querySelector(".sun").onclick = (e) => {
-    document.documentElement.classList.remove("dark")
-    document.querySelector(".theme .inner").classList.remove("dark")
-    localStorage.setItem("theme", "light")
+  controller?.abort()
+  controller = new AbortController()
+  const { signal } = controller
+
+  const hamburger = document.querySelector(".hamburger"),
+  root = document.documentElement,
+  inner = document.querySelector(".theme .inner"),
+  ul = document.querySelector("nav ul"),
+  sun = document.querySelector(".sun"),
+  moon = document.querySelector(".moon")
+
+  const theme = localStorage.getItem("theme")
+  if(theme === "dark") {
+    root.classList.add("dark")
+    inner.classList.add("dark")
+  } else {
+    root.classList.remove("dark")
+    inner.classList.remove("dark")
   }
 
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active")
+    ul.classList.toggle("active")
+  }, {signal})
+
+  sun.addEventListener("click", () => {
+    root.classList.remove("dark")
+    inner.classList.remove("dark")
+    localStorage.setItem("theme", "light")
+  }, {signal})
+
   //moon
-  document.querySelector(".moon").onclick = (e) => {
-    document.documentElement.classList.add("dark")
-    document.querySelector(".theme .inner").classList.add("dark")
+  moon.addEventListener("click", () => {
+    root.classList.add("dark")
+    inner.classList.add("dark")
     localStorage.setItem("theme", "dark")
-  }
+  }, {signal})
 }
 
 fireEvents()

@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions"
+import { ClientRouter } from "astro:transitions"
 import Navbar from "../components/Navbar.astro"
 import Footer from "../components/Footer.astro"
 import "../globals.css"
@@ -62,17 +62,18 @@ export const URL = "https://cskskvku.vercel.app"
     <meta property="twitter:image" content="/home_sc.jpg" />
     <title>{Astro.props.title} | KSKV Kachchh University</title>
     <script is:inline>
-      const theme = localStorage.getItem("theme")
-      theme === "dark" ? document.documentElement.classList.add("dark") : null
+       document.documentElement.classList.toggle("dark", localStorage.getItem("theme") === "dark")
     </script>
-    <script>
+    <script defer src="/navEvents.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+   <!--  <script>
       const theme = localStorage.getItem("theme")
       theme === "dark"
-        ? document
-            .querySelector<HTMLDivElement>(".theme .inner")
-            .classList.add("dark")
+        ? document.querySelector(".theme .inner").classList.add("dark")
         : null
-    </script>
+    </script> -->
     <link
       rel="preload"
       type="image/webp"
@@ -87,12 +88,11 @@ export const URL = "https://cskskvku.vercel.app"
     />
     <link rel="canonical" href={Astro.url} />
     <slot name="homeBg" />
-    <ViewTransitions />
-    <script defer src="/navEvents.js"></script>
+    <ClientRouter />
   </head>
   <body>
     <Navbar />
-    <main style="min-height: 85vh;">
+    <main style="min-height: 85vh; padding-block: 1rem;">
       <slot />
     </main>
     <Footer />

@@ -123,6 +123,10 @@ const dropLinks = [
 
   nav {
     border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
   }
   nav .container {
     padding-block: 1rem;
@@ -194,9 +198,7 @@ const dropLinks = [
     }
   }
   @media (max-width: 786px) {
-    nav {
-      position: relative;
-    }
+
     .container {
       gap: 0.3rem;
     }
@@ -218,6 +220,7 @@ const dropLinks = [
       opacity: 0;
       transition: var(--transition);
       padding-block: 0.5rem;
+      padding-inline: .5rem;
     }
     .navUl.active {
       visibility: visible;

@@ -16,27 +16,30 @@ const admin_staff = data.filter(
 )
 ---
 
-<Layout title="Peoples">
+<Layout title="People">
   <div class="container">
     <div class="table_wrapper">
-      <table border="1">
+      <table>
         <thead>
           <tr>
-            <th colspan="5">Members of The Faculty</th>
+            <th class="tableHeading" colspan="5">
+              Members of The Faculty
+              <span>Academic staff and their teaching assignments for the current academic year</span>
+            </th>
           </tr>
           <tr>
             <th>Name</th>
             <th>Designation</th>
-            <th>Courses in Summer</th>
-            <th>Courses in Winter</th>
+            <th class="text-nowrap">Courses in Summer</th>
+            <th class="text-nowrap">Courses in Winter</th>
           </tr>
         </thead>
         {
           profs.map(
-            ({ Name, Designation, Courses_Summer, Courses_Winter }, index) => (
+            ({ Name, Designation, Courses_Summer, Courses_Winter }) => (
               <tr>
                 <td>{Name}</td>
-                <td>{Designation}</td>
+                <td style="display: flex;flex-wrap: wrap;gap: .5rem;">{Designation.split(",").map(role=><span class="badge">{role}</span>)}</td>
                 <td>{Courses_Summer}</td>
                 <td>{Courses_Winter}</td>
               </tr>
@@ -46,68 +49,107 @@ const admin_staff = data.filter(
       </table>
     </div>
     <div class="row">
-      <table border="1">
-        <tr>
-          <th colspan="3">Members of The Technical Staff</th>
-        </tr>
-        <tr>
-          <th>Name</th>
-          <th>Designation</th>
-        </tr>
-        {
-          tech_staff.map(({ Name, Designation }, index) => (
-            <tr>
-              <td>{Name}</td>
-              <td>{Designation}</td>
-            </tr>
-          ))
-        }
-      </table>
-      <table border="1">
-        <tr>
-          <th colspan="3">Members of The Administrative Staff</th>
-        </tr>
-        <tr>
-          <th>Name</th>
-          <th>Designation</th>
-        </tr>
-        {
-          admin_staff.map(({ Name, Designation }, index) => (
-            <tr>
-              <td>{Name}</td>
-              <td>{Designation}</td>
-            </tr>
-          ))
-        }
-      </table>
+      <div class="table_wrapper">
+        <table>
+          <tr>
+            <th class="tableHeading" colspan="3">
+            Members of The Technical Staff
+            <span>Technical support personnel responsible for laboratory and equipment maintenance</span>
+          </th>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <th>Designation</th>
+          </tr>
+          {
+            tech_staff.map(({ Name, Designation }) => (
+              <tr>
+                <td>{Name}</td>
+                <td><span class="badge">{Designation}</span></td>
+              </tr>
+            ))
+          }
+        </table>
+      </div>
+      <div class="table_wrapper">
+        <table>
+          <tr>
+            <th class="tableHeading" colspan="3">
+            Members of The Administrative Staff
+            <span>Administrative personnel responsible for office management and support</span>
+          </th>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <th>Designation</th>
+          </tr>
+          {
+            admin_staff.map(({ Name, Designation }, index) => (
+              <tr>
+                <td>{Name}</td>
+                <td><span class="badge">{Designation}</span></td>
+              </tr>
+            ))
+          }
+        </table>
+      </div>
     </div>
   </div>
 </Layout>
 
 <style>
-  .container {
-    margin-top: 2rem;
-  }
   .table_wrapper {
     overflow-x: auto;
+    border-radius: 1rem;
+    border: 4px solid var(--accent-opaque);
+    box-shadow: 0 0 5px var(--accent-opaque);
+    table{
+      width: 100%;
+    }
   }
-  table {
+  .border-wrapper{
+    box-shadow: 0 0 4px var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 1rem;
+  }
+  table{
     border-collapse: collapse;
   }
-  table th {
+  tr:nth-child(odd){
+    background: var(--accent-opaque);
+  }
+  th {
     color: var(--accent);
   }
-
-  table th,
-  table td {
+  .tableHeading {
+    font-size: 1.5rem;
+    span {
+      margin-top: 0.5rem;
+      display: block;
+      font-size: initial;
+      color: var(--accent-body);
+      font-weight: normal;
+    }
+  }
+  th,
+  td {
     padding: 1rem;
-    line-height: 1;
-    text-align: center;
+    text-align: start;
   }
   .row {
     display: flex;
     margin-top: 2rem;
     gap: 2rem;
+  }
+  .badge {
+    padding: 0.4rem;
+    border-radius: 1000px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    text-wrap: nowrap;
+  }
+  .text-nowrap{
+    text-wrap: nowrap;
   }
   @media (max-width: 560px) {
     .row {

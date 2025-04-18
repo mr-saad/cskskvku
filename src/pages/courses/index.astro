@@ -6,11 +6,11 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
 ---
 
 <Layout title="Courses">
-  <div style="margin-top: 2rem;" class="container">
+  <div  class="container">
     <h2 class="heading">Courses (Syllabus)</h2>
     <ol class="courses">
       {
-        courses.map((course, index) => {
+        courses.map((course) => {
           return (
             <li>
               <a

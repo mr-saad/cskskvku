@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions"
+import { ClientRouter  } from "astro:transitions"
 import Footer from "../components/Footer.astro"
 import Navbar from "../components/Navbar.astro"
 import "../globals.css"
@@ -13,24 +13,16 @@ const { frontmatter } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{frontmatter.title} | CS KSKVKU Blogs</title>
     <script is:inline>
-      const theme = localStorage.getItem("theme")
-      theme === "dark" ? document.documentElement.classList.add("dark") : null
+       document.documentElement.classList.toggle("dark", localStorage.getItem("theme") === "dark")
     </script>
-    <script>
-      const theme = localStorage.getItem("theme")
-      theme === "dark"
-        ? document
-            .querySelector<HTMLDivElement>(".theme .inner")
-            .classList.add("dark")
-        : null
-    </script>
+    <script defer src="/navEvents.js"></script>
     <link slot="canonical" rel="canonical" href={Astro.url} />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body>
     <Navbar />
-    <main style="min-height: 85vh;">
-      <div style="margin-top: 2rem;" class="container blog_container">
+    <main style="min-height: 85vh; padding-block: 1rem;">
+      <div class="container blog_container">
         <h2 class="heading">{frontmatter.title}</h2>
         <p style="font-size: small;">{frontmatter.date}</p>
         <p>{frontmatter.description}</p>
