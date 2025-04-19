@@ -6,6 +6,6 @@ date: 13 Dec 23
 layout: ../../layouts/BlogLayout.astro
 ---
 
-##some content here
+## some content here
 
 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem aperiam incidunt delectus dignissimos. Doloremque ea tempore voluptate molestias vel odio quaerat! Repellendus, aliquid corrupti. Voluptatem eius quia aliquam asperiores laboriosam?

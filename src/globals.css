@@ -7,7 +7,7 @@
     sans-serif;
 }
 :root {
-  --transition: 200ms ease;
+  --transition: 300ms ease;
   --padding: 3rem;
   --bg: rgb(255, 255, 255); /* dark 15,15,15 */
   --accent: #c87b28; /* dark #fff */
@@ -15,6 +15,10 @@
   --accent-body: #555; /* dark #666 */
   --border: rgba(200, 123, 40, 0.3);
   --box-shadow: rgba(0, 0, 0, 0.1);
+}
+::view-transition-old(root),
+::view-transition-new(root){
+  animation-duration: 300ms;
 }
 
 html {
@@ -88,7 +92,7 @@ p {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
   gap: 1rem;
 }
 

@@ -13,12 +13,12 @@ const navLinks = [
     href: "/facilities",
   },
   {
-    href: "/blogs",
+    href: "/people",
   },
 ]
 const dropLinks = [
   {
-    href: "/people",
+    href: "/blogs",
   },
   {
     href: "/about",
@@ -39,11 +39,46 @@ const dropLinks = [
       />
     </a>
 
-    <ThemeToggler />
     <Hamburger />
-    <ul class="navUl">
+    <ul>
+      <li class="themeSwitch">
+        <input type="checkbox">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="#000"
+          class="moon"
+        >
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="#fff"
+          stroke="#fff"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="sun"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+
+      </li>
       <li>
-        <a class={Astro.url.pathname === "/" && "active"} href="/"> Home</a>
+        <a class={Astro.url.pathname === "/" && "active"} href="/">Home</a>
       </li>
       {
         navLinks.map((link) => {
@@ -60,7 +95,6 @@ const dropLinks = [
           )
         })
       }
-
       <li class="drop-wrapper">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +107,7 @@ const dropLinks = [
           stroke-linecap="round"
           stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
         >
-        <ul class="dropdown">
+        <ol class="dropdown">
           {
             dropLinks.map((link) => {
               const text = link.href.split("/")[1]
@@ -89,7 +123,7 @@ const dropLinks = [
               )
             })
           }
-        </ul>
+        </ol>
       </li>
     </ul>
   </div>
@@ -125,24 +159,52 @@ const dropLinks = [
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
+    transition: var(--transition);
     background: var(--bg);
     z-index: 10;
   }
-  nav .container {
-    padding-block: 1rem;
+  .container {
+    padding-block: .5rem;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 2fr 1fr;
   }
 
-  nav > div {
+  nav ul {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-  }
-  .navUl {
-    display: flex;
     list-style: none;
     text-transform: capitalize;
   }
-  .navUl li a {
+  .themeSwitch{
+    position: relative;
+    margin: .5rem;
+    padding-inline: .5rem;
+    width: 4rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &.dark .sun{
+      opacity: 1;
+    }
+    &.dark .moon{
+      opacity: 0;
+    }
+
+    input[type='checkbox']{
+      left: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      border: 1px solid var(--accent);
+      border-radius: 1000px;
+      appearance: none;
+      cursor: pointer;
+    }
+  }
+  nav ul li a {
     padding: 0.5rem 1rem;
     text-decoration: none;
     color: currentColor;
@@ -157,20 +219,22 @@ const dropLinks = [
   }
 
   .drop-wrapper {
-    padding-left: 1rem;
+    padding-inline: .5rem;
+    padding-block: 1rem;
     position: relative;
     cursor: pointer;
-  }
-  .drop-wrapper svg {
-    vertical-align: middle;
-    stroke: var(--accent);
+
+    svg {
+      vertical-align: middle;
+      stroke: var(--accent);
+    }
   }
   .dropdown {
     border-radius: 0.3rem;
     position: absolute;
     width: 20rem;
     border: 1px solid var(--border);
-    top: 102%;
+    top: 100%;
     right: 0;
     background-color: var(--bg);
     list-style: none;
@@ -180,7 +244,8 @@ const dropLinks = [
     transition: var(--transition);
     z-index: 2;
   }
-  .drop-wrapper:hover .dropdown {
+  .drop-wrapper:hover .dropdown,
+  .drop-wrapper:focus-within .dropdown  {
     visibility: visible;
     pointer-events: all;
     opacity: 1;
@@ -193,12 +258,14 @@ const dropLinks = [
     .cs-logo {
       height: 39px;
     }
-    .navUl li a {
+    .themeSwitch{
+      margin-inline: .5rem;
+    }
+    nav ul li a {
       padding: 0.5rem;
     }
   }
   @media (max-width: 786px) {
-
     .container {
       gap: 0.3rem;
     }
@@ -206,33 +273,37 @@ const dropLinks = [
       width: 260px;
     }
 
-    .navUl {
+    nav ul {
       position: absolute;
-      flex-direction: column;
-      background-color: var(--bg);
-      width: 100%;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
       left: 0;
-      top: 100%;
+      width: 100%;
+      top: 102%;
+      padding-inline: 1rem;
+      padding-block-end: .5rem;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: unset;
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
       visibility: hidden;
       pointer-events: none;
       opacity: 0;
-      transition: var(--transition);
-      padding-block: 0.5rem;
-      padding-inline: .5rem;
-    }
-    .navUl.active {
-      visibility: visible;
-      pointer-events: all;
-      opacity: 1;
-      z-index: 2;
-    }
-    .navUl li a {
-      display: block;
-      padding: 0.5rem 1rem;
-    }
 
+      &.active {
+        visibility: visible;
+        pointer-events: all;
+        opacity: 1;
+      }
+    }
+    .themeSwitch{
+      margin-inline: 0;
+      margin-block-start: 1rem;
+    }
+    nav ul li a {
+      display: block;
+      padding-inline: 0;
+    }
     .drop-wrapper {
       padding: 0;
       cursor: none;
@@ -245,7 +316,7 @@ const dropLinks = [
       width: 100%;
       position: static;
     }
-    .navUl.active .dropdown {
+    nav ul.active .dropdown {
       visibility: visible;
       opacity: 1;
       pointer-events: all;

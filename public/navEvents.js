@@ -6,18 +6,17 @@ const fireEvents = () => {
 
   const hamburger = document.querySelector(".hamburger"),
   root = document.documentElement,
-  inner = document.querySelector(".theme .inner"),
   ul = document.querySelector("nav ul"),
-  sun = document.querySelector(".sun"),
-  moon = document.querySelector(".moon")
+  themeSwitch = document.querySelector(".themeSwitch")
 
-  const theme = localStorage.getItem("theme")
+  let theme = localStorage.getItem("theme")
+  console.log(themeSwitch)
   if(theme === "dark") {
     root.classList.add("dark")
-    inner.classList.add("dark")
+    themeSwitch.classList.add("dark")
   } else {
     root.classList.remove("dark")
-    inner.classList.remove("dark")
+    themeSwitch.classList.remove("dark")
   }
 
   hamburger.addEventListener("click", () => {
@@ -25,17 +24,11 @@ const fireEvents = () => {
     ul.classList.toggle("active")
   }, {signal})
 
-  sun.addEventListener("click", () => {
-    root.classList.remove("dark")
-    inner.classList.remove("dark")
-    localStorage.setItem("theme", "light")
-  }, {signal})
-
-  //moon
-  moon.addEventListener("click", () => {
-    root.classList.add("dark")
-    inner.classList.add("dark")
-    localStorage.setItem("theme", "dark")
+  themeSwitch.addEventListener("click", () => {
+    theme = localStorage.getItem("theme")
+    root.classList.toggle("dark")
+    themeSwitch.classList.toggle("dark")
+    localStorage.setItem("theme", theme === "dark" ? "light" : "dark")
   }, {signal})
 }
 
