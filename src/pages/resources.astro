@@ -1,0 +1,103 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { xata } from "../xata"
+const resources = await xata.db.Resources.select(["Title", "Category", "SubCategory","Url", "Description"]).getAll()
+const groupedData = [];
+resources.forEach(item => {
+  const { Category, SubCategory } = item;
+  let categoryGroup = groupedData.find(group => group.category === Category);
+  if (!categoryGroup) {
+    categoryGroup = { category: Category, subcategories: [] };
+    groupedData.push(categoryGroup);
+  }
+
+  const subcategoryName = SubCategory || null;
+  let subcategoryGroup = categoryGroup.subcategories.find(
+    sub => sub.name === subcategoryName
+  );
+  if (!subcategoryGroup) {
+    subcategoryGroup = { name: subcategoryName, items: [] };
+    categoryGroup.subcategories.push(subcategoryGroup);
+  }
+  subcategoryGroup.items.push(item);
+});
+---
+
+<Layout title="Resources">
+<div class="container">
+	<h2 class="heading">Resources</h2>
+		{
+			groupedData.map(data=>{
+				return (
+					<div class="resourceContainer">
+						<h3 class="categoryHeading">{data.category}</h3>
+							{
+								data.subcategories.map(sub=>(
+									sub.name ?
+										(
+											<h3 class="subCategoryHeading">{sub.name}</h3>
+											<div class="grid">
+												{sub.items.map(item=>
+													<a href={item.Url} target="_blank" class="card">
+														<strong class="title">{item.Title}</strong>
+														<p>{item.Description && item.Description}</p>
+													</a>)}
+											</div>
+										) : (
+											<div class="grid">
+												{sub.items.map(item=>
+													<a href={item.Url} target="_blank" class="card">
+														<strong class="title">{item.Title}</strong>
+														<p>{item.Description && item.Description}</p>
+													</a>)}
+											</div>
+										)
+								))
+							}
+						</div>
+				)
+			})
+		}
+</div>
+</Layout>
+
+<style>
+	.resourceContainer{
+		margin-block-end: 3rem;
+	}
+
+	h3{
+			color: var(--accent);
+			margin-bottom: 0.5rem;
+			&.subCategoryHeading{
+				color: var(--accent-body);
+			}
+	}
+	.grid{
+		margin-block-end: 2rem;
+		@media screen and (min-width: 786px) {
+			grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr)) ;
+		}
+	}
+	.card {
+		padding: 1rem;
+		border-radius: 1rem;
+		background: var(--accent-opaque);
+		cursor: pointer;
+		text-decoration: none;
+		.title{
+			transition: var(--transition);
+			color: CanvasText;
+		}
+		p{
+			transition: var(--transition);
+			color: var(--accent-body);
+		}
+		&:hover .title{
+			text-decoration: underline;
+		}
+		&:hover p{
+			color: var(--accent);
+		}
+	}
+</style>

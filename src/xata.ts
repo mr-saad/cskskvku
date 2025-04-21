@@ -33,6 +33,16 @@ const tables = [
       { name: "Courses_Winter", type: "string" },
     ],
   },
+  {
+    name: "Resources",
+    columns: [
+      { name: "Category", type: "text" },
+      { name: "Title", type: "text" },
+      { name: "Url", type: "text" },
+      { name: "Description", type: "text" },
+      { name: "SubCategory", type: "text" },
+    ],
+  },
 ] as const;
 
 export type SchemaTables = typeof tables;
@@ -47,19 +57,22 @@ export type ProgramsRecord = Programs & XataRecord;
 export type Peoples = InferredTypes["Peoples"];
 export type PeoplesRecord = Peoples & XataRecord;
 
+export type Resources = InferredTypes["Resources"];
+export type ResourcesRecord = Resources & XataRecord;
+
 export type DatabaseSchema = {
   Courses: CoursesRecord;
   Programs: ProgramsRecord;
   Peoples: PeoplesRecord;
+  Resources: ResourcesRecord;
 };
 
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
-  databaseURL:
-    import.meta.env.XATA_DATABASE_URL,
-  apiKey: import.meta.env.XATA_API_KEY,
-  branch: import.meta.env.XATA_BRANCH
+  databaseURL: import.meta.env.XATA_DATABASE_URL,
+  branch: import.meta.env.XATA_BRANCH,
+  apiKey: import.meta.env.XATA_API_KEY
 };
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {

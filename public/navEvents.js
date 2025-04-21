@@ -10,7 +10,6 @@ const fireEvents = () => {
   themeSwitch = document.querySelector(".themeSwitch")
 
   let theme = localStorage.getItem("theme")
-  console.log(themeSwitch)
   if(theme === "dark") {
     root.classList.add("dark")
     themeSwitch.classList.add("dark")
