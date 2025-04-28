@@ -16,8 +16,8 @@ const programs = await xata.db.Programs.select([
     {
       programs.map(({ Description, Requirement, Title, Slug }) => {
         return (
-          <div id={Slug} style="margin-bottom: 1.5rem;scroll-margin: 1.2rem;">
-            <h3 style="color: CanvasText;">{Title}</h3>
+          <div id={Slug} style="margin-bottom: 1.5rem;scroll-margin: 5rem;">
+            <h3 transition:name={`Title_${Title}`} style="color: CanvasText;">{Title}</h3>
             <p>{Description}</p>
             <p style="white-space: pre-line;margin-top: 1rem;">{Requirement}</p>
             <a class="btn" style="margin-top: 1rem;" href={`/courses/${Slug}`}>View Syllabus</a>

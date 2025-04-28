@@ -14,7 +14,7 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
           return (
             <li>
               <a
-                transition:name={`title_${course.Name}`}
+                transition:name={`Title_${course.Name}`}
                 class="course"
                 href={`/courses/${course.Slug}/`}
               >

@@ -26,7 +26,7 @@ const { Name, Syllabus } = Astro.props as {
 
 <Layout title={Name}>
   <div class="container">
-    <h2 class="heading" transition:name={`title_${Name}`}>{Name}</h2>
+    <h2 class="heading" transition:name={`Title_${Name}`}>{Name}</h2>
     {
       Syllabus &&
         Syllabus.semesters.map(({ subjects }, index) => (
