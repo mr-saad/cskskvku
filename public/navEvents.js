@@ -44,9 +44,7 @@ const fireEvents = () => {
 fireEvents()
 
 document.addEventListener("astro:after-swap", () => {
-  document.documentElement.classList.add(
-    "dark",
-    localStorage.getItem("theme") === "dark",
-  )
+  localStorage.getItem("theme") === "dark" &&
+    document.documentElement.classList.add("dark")
   fireEvents()
 })
