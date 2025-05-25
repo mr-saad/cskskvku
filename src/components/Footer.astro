@@ -3,7 +3,7 @@
     <div class="grid">
       <div>
         <h3>Menu</h3>
-        <ul style="margin-top: 1rem;">
+        <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/programs">Programs</a></li>
@@ -12,25 +12,33 @@
         </ul>
       </div>
       <div>
-        <h3>Useful Links</h3>
-        <ul style="margin-top: 1rem;">
+        <h3>Quick Links</h3>
+        <ul>
           <li>
             <a href="https://kskvku.ac.in" target="blank"
               >KSKVKU Official Site</a
             >
           </li>
-          <li><a href="#">Resources</a></li>
-          <li><a href="#">News</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Fee Structure</a></li>
+          <li><a href="/resources">Resources</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/blogs">Blogs</a></li>
         </ul>
       </div>
       <div>
         <h3>Address</h3>
         <p>
           Department of Computer Science, KSKV Kachchh University, Mundra Road,
-          Bhuj-Kachchh, Gujarat - 370001
+          Bhuj - Kachchh (370001), Gujarat
         </p>
+      </div>
+      <div>
+        <h3>Newsletter</h3>
+        <p>Subscribe to our newsletter for updates on events, research, and opportunities.</p>
+        <div class="newsletter">
+          <input type="email" required placeholder="alice45@gmail.com">
+          <button class="btn">Subscribe</button>
+        </div>
       </div>
     </div>
     <hr />
@@ -92,7 +100,7 @@
     color: #888;
   }
   footer .grid {
-    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(9.5rem,100%), 1fr));
     gap: 2rem;
 
     @media screen and (max-width: 786px) {
@@ -117,6 +125,7 @@
     color: currentColor;
     transition: var(--transition);
   }
+  footer a:focus-within,
   footer a:hover {
     color: var(--accent);
   }
@@ -140,5 +149,16 @@
   }
   .socials > *:hover {
     color: #fff;
+  }
+  .newsletter{
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+    input{
+      border: none;
+      border-radius: 0.3rem;
+      padding: 0.2rem 0.5rem;
+    }
   }
 </style>

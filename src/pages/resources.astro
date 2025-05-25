@@ -37,16 +37,16 @@ resources.forEach(item => {
 										(
 											<h3 class="subCategoryHeading">{sub.name}</h3>
 											<div class="grid">
-												{sub.items.map(item=>
-													<a href={item.Url} target="_blank" class="card">
+												{sub.items.map((item,index)=>
+													<a href={item.Url} data-aos={index%2!==0 ?"fade-left":"fade-right"} target="_blank" class="card">
 														<strong class="title">{item.Title}</strong>
 														<p>{item.Description && item.Description}</p>
 													</a>)}
 											</div>
 										) : (
 											<div class="grid">
-												{sub.items.map(item=>
-													<a href={item.Url} target="_blank" class="card">
+												{sub.items.map((item,index)=>
+													<a href={item.Url} data-aos={index%2!==0 ?"fade-left":"fade-right"} target="_blank" class="card">
 														<strong class="title">{item.Title}</strong>
 														<p>{item.Description && item.Description}</p>
 													</a>)}
@@ -84,6 +84,7 @@ resources.forEach(item => {
 		padding: 1rem;
 		border-radius: 1rem;
 		background: var(--accent-opaque);
+		border: 1px solid var(--border);
 		cursor: pointer;
 		text-decoration: none;
 		.title{

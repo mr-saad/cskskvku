@@ -18,7 +18,7 @@ const admin_staff = data.filter(
 
 <Layout title="People">
   <div class="container">
-    <div class="table_wrapper">
+    <div data-aos="fade-up" class="table_wrapper">
       <table>
         <thead>
           <tr>
@@ -39,7 +39,7 @@ const admin_staff = data.filter(
             ({ Name, Designation, Courses_Summer, Courses_Winter }) => (
               <tr>
                 <td>{Name}</td>
-                <td style="display: flex;flex-wrap: wrap;gap: .5rem;">{Designation.split(",").map(role=><span class="badge">{role}</span>)}</td>
+                <td style={{display:Designation.includes(",") ?  "flex" : "table-cell",flexWrap: "wrap",gap: ".5rem"}}>{Designation.split(",").map(role=><span class="badge">{role}</span>)}</td>
                 <td>{Courses_Summer}</td>
                 <td>{Courses_Winter}</td>
               </tr>
@@ -49,7 +49,7 @@ const admin_staff = data.filter(
       </table>
     </div>
     <div class="row">
-      <div class="table_wrapper">
+      <div data-aos="fade-right" class="table_wrapper">
         <table>
           <tr>
             <th class="tableHeading" colspan="3">
@@ -71,7 +71,7 @@ const admin_staff = data.filter(
           }
         </table>
       </div>
-      <div class="table_wrapper">
+      <div data-aos="fade-left" class="table_wrapper">
         <table>
           <tr>
             <th class="tableHeading" colspan="3">
@@ -101,13 +101,11 @@ const admin_staff = data.filter(
   .table_wrapper {
     overflow-x: auto;
     border-radius: 1rem;
-    border: 4px solid var(--accent-opaque);
+    border: 1px solid var(--border);
     table{
       width: 100%;
+      border-collapse: collapse;
     }
-  }
-  table{
-    border-collapse: collapse;
   }
   tr:nth-child(odd){
     background: var(--accent-opaque);

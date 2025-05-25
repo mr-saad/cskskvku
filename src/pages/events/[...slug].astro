@@ -1,0 +1,48 @@
+---
+import type { GetStaticPaths } from "astro"
+import Layout from "../../layouts/Layout.astro"
+import { xata } from "../../xata";
+import Markdown from "../../components/Markdown.astro";
+
+export const getStaticPaths: GetStaticPaths = async() => {
+	const paths = await xata.db.NewsAndEvents.select(["Tags","Title","Slug","Description","Content"]).getAll()
+	return paths.map(path=>({params:{slug:path.Slug},props:path}))
+}
+
+const {Tags, Title, Description, Content, xata} = Astro.props
+---
+
+<Layout title={Title}>
+	<div class="container">
+		<div class="tags">
+			{Tags.map(tag=><span>{tag}</span>)}
+		</div>
+		<h2 class="title">{Title}</h2>
+		<p>{new Date(xata.createdAt).toLocaleDateString()}</p>
+		<p>{Description}</p>
+		<div class="content">
+			<Markdown content={Content} />
+		</div>
+	</div>
+</Layout>
+<style>
+	.title{
+		color: var(--accent);
+	}
+	.content{
+		margin-block-start: 1rem;
+	}
+	.tags {
+	    align-self: start;
+	    display: flex;
+	    flex-wrap: wrap;
+	    gap: 0.5rem;
+	    margin-block-end: .5rem;
+
+	    span {
+	      padding: 0.1rem 1rem;
+	      background: var(--accent-opaque);
+	      border-radius: 1000px;
+	    }
+	  }
+</style>

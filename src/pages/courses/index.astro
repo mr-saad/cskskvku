@@ -14,7 +14,6 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
           return (
             <li>
               <a
-                transition:name={`Title_${course.Name}`}
                 class="course"
                 href={`/courses/${course.Slug}/`}
               >
@@ -40,6 +39,7 @@ const courses = await xata.db.Courses.select(["id", "Name", "Slug"]).getAll()
     color: currentColor;
     transition: color var(--transition);
   }
+  .course:focus-within,
   .course:hover {
     color: var(--accent);
   }

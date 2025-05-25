@@ -12,6 +12,9 @@
   "dependencies": {
     "@xata.io/client": "^0.30.1",
     "astro": "^5.7.2",
+    "dompurify": "^3.2.5",
+    "jsdom": "^26.1.0",
+    "marked": "^15.0.11",
     "sharp": "^0.34.1"
   }
 }

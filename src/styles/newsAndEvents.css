@@ -1,0 +1,54 @@
+.headingTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    color: var(--accent);
+  }
+}
+.news {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 0.3rem;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .tags {
+    align-self: start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-end: 0.5rem;
+
+    span {
+      padding: 0.1rem 1rem;
+      background: var(--accent-opaque);
+      border-radius: 1000px;
+    }
+  }
+
+  h3 {
+    color: CanvasText;
+  }
+  h3,
+  p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+  }
+  p {
+    margin-block-end: 1rem;
+  }
+  .btn {
+    margin-block-start: auto;
+    align-self: start;
+  }
+}

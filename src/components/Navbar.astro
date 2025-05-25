@@ -10,16 +10,23 @@ const navLinks = [
     href: "/courses",
   },
   {
-    href: "/facilities",
-  },
-  {
     href: "/people",
   },
 ]
 const dropLinks = [
   {
+    href: "/news",
+  },
+  {
+    href: "/events",
+  },
+  {
     href: "/resources",
-  },  {
+  },
+  {
+    href: "/facilities",
+  },
+  {
     href: "/blogs",
   },
   {
@@ -34,8 +41,9 @@ const dropLinks = [
 <nav>
   <div class="container">
     <a class="cs-logo" aria-label="Home Page" href="/" title="Department Of Computer Science KSKVKU"
-      ><img src="/logo_kskvku_new.webp" alt="Department of Computer Science Logo" class="black" /><img
-        src="/logo_kskvku_new_white.webp"
+      >
+      <img
+        src="/logo_kskvku_new_white.png"
         alt="Department of Computer Science Logo"
         class="white"
       />
@@ -50,7 +58,7 @@ const dropLinks = [
           width="20"
           height="20"
           viewBox="0 0 24 24"
-          fill="#000"
+          fill="#fff"
           class="moon"
         >
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
@@ -99,6 +107,7 @@ const dropLinks = [
       }
       <li class="drop-wrapper">
         <svg
+          tabindex="0"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -132,51 +141,33 @@ const dropLinks = [
 </nav>
 
 <style>
-  .cs-logo {
-    position: relative;
-    width: 350px;
-    height: 45px;
+  .cs-logo img{
+    max-width: 100%;
   }
-  .cs-logo img {
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    position: absolute;
-    width: 100%;
-    transition: var(--transition);
-    vertical-align: middle;
-    object-fit: contain;
-  }
-  html .cs-logo img.white,
-  html.dark .cs-logo img.black {
-    visibility: hidden;
-    opacity: 0;
-  }
-  html.dark .cs-logo img.white {
-    visibility: visible;
-    opacity: 1;
-  }
-
   nav {
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     transition: var(--transition);
-    background: var(--bg);
+    background: rgb(15, 15, 15);
     z-index: 10;
   }
   .container {
     padding-block: .5rem;
     display: grid;
     align-items: center;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 
   nav ul {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    background: rgb(15, 15, 15);
     list-style: none;
     text-transform: capitalize;
+    justify-content: end;
   }
   .themeSwitch{
     position: relative;
@@ -188,6 +179,13 @@ const dropLinks = [
     align-items: center;
     justify-content: space-between;
 
+    .sun,.moon{
+      transition: var(--transition);
+    }
+
+    .sun{
+      opacity: 0;
+    }
     &.dark .sun{
       opacity: 1;
     }
@@ -209,12 +207,13 @@ const dropLinks = [
   nav ul li a {
     padding: 0.5rem 1rem;
     text-decoration: none;
-    color: currentColor;
+    color: #888;
     font-weight: bold;
     opacity: 0.8;
     transition: var(--transition);
   }
   nav ul li a.active,
+  nav ul li a:focus-within,
   nav ul li a:hover {
     color: var(--accent);
     opacity: 1;
@@ -238,7 +237,7 @@ const dropLinks = [
     border: 1px solid var(--border);
     top: 100%;
     right: 0;
-    background-color: var(--bg);
+    background-color: rgb(15, 15, 15);
     list-style: none;
     visibility: hidden;
     pointer-events: none;
@@ -257,9 +256,6 @@ const dropLinks = [
   }
 
   @media (max-width: 990px) {
-    .cs-logo {
-      height: 39px;
-    }
     .themeSwitch{
       margin-inline: .5rem;
     }
@@ -271,21 +267,17 @@ const dropLinks = [
     .container {
       gap: 0.3rem;
     }
-    .cs-logo {
-      width: 260px;
-    }
-
     nav ul {
       position: absolute;
       left: 0;
       width: 100%;
-      top: 102%;
+      top: 101.5%;
       padding-inline: 1rem;
       padding-block-end: .5rem;
       flex-direction: column;
       flex-wrap: wrap;
       align-items: unset;
-      background-color: var(--bg);
+      justify-content: unset;
       border-bottom: 1px solid var(--border);
       transition: var(--transition);
       visibility: hidden;
@@ -322,6 +314,11 @@ const dropLinks = [
       visibility: visible;
       opacity: 1;
       pointer-events: all;
+    }
+  }
+  @media (max-width: 640px) {
+    .container{
+      grid-template-columns: 3fr 1fr;
     }
   }
 </style>

@@ -3,6 +3,9 @@ import { Image } from "astro:assets"
 import Layout from "../layouts/Layout.astro"
 import { xata } from "../xata"
 import bg from "../bg.webp"
+import News from "../components/News.astro"
+import Events from "../components/Events.astro"
+
 const programs = await xata.db.Programs.select([
   "Title",
   "Description",
@@ -11,15 +14,8 @@ const programs = await xata.db.Programs.select([
 ---
 
 <Layout title="Department of Computer Science">
-  <link
-    slot="homeBg"
-    rel="preload"
-    type="image/webp"
-    as="image"
-    href={bg.src}
-  />
-  <header class="container">
-    <div>
+  <header class="container" style="min-height: 90vh">
+    <div data-aos="fade-right">
       <h1 style="line-height: 1;color: var(--accent);">
         Department of Computer Science
       </h1>
@@ -28,13 +24,15 @@ const programs = await xata.db.Programs.select([
       </p>
     </div>
     <Image
+      fetchpriority="high"
+      data-aos="fade-left"
       alt="Department of Computer Science Image"
       src={bg}
       width={500}
       height={400}
     />
   </header>
-  <div
+  <section
     id="programs"
     class="container"
     style="flex-direction: column; justify-content: center;align-items: start;"
@@ -43,7 +41,7 @@ const programs = await xata.db.Programs.select([
     <div class="grid">
       {
         programs.map(({ Title, Description, Slug }) => (
-          <div class="course">
+          <div data-aos="fade-up" class="course">
             <h3>{Title}</h3>
             <p>{Description}</p>
             <a class="btn" href={`/programs/#${Slug}`}>
@@ -53,16 +51,20 @@ const programs = await xata.db.Programs.select([
         ))
       }
     </div>
+  </section>
+  <div style="margin-top: 4rem">
+    <News count={4} />
+  </div>
+  <div style="margin-top: 4rem">
+    <Events count={4} />
   </div>
 </Layout>
 
 <style>
-  .container {
+  header {
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    display: flex;
-    gap: 1.5rem;
-    min-height: 90vh;
 
     @media screen and (max-width: 786px) {
       flex-direction: column;
@@ -88,7 +90,7 @@ const programs = await xata.db.Programs.select([
     scroll-margin: 1rem;
   }
   .grid {
-    gap: 3rem;
+    gap: 1rem;
   }
   .course {
     display: flex;
@@ -96,7 +98,6 @@ const programs = await xata.db.Programs.select([
     padding: 1.5rem;
     border-radius: 0.3rem;
     border: 1px solid var(--border);
-    box-shadow: 0 0 3px var(--border);
   }
   .course h3 {
     color: CanvasText;
@@ -115,7 +116,4 @@ const programs = await xata.db.Programs.select([
   .course p {
     margin-bottom: 0.5rem;
   }
-/*  .container {
-    max-width: 80rem;
-  }*/
 </style>

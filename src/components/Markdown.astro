@@ -1,0 +1,14 @@
+---
+import {marked} from "marked"
+import {JSDOM} from "jsdom"
+import purify from "dompurify"
+
+const content = marked(Astro.props.content ?? "",{
+	gfm: true,
+	breaks: true
+})
+const DOMPurify = purify(new JSDOM('').window)
+const finalHTML = DOMPurify.sanitize(content)
+---
+
+<div set:html={finalHTML}/>

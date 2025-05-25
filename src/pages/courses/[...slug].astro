@@ -5,14 +5,15 @@ import { xata } from "../../xata"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return (
-    await xata.db.Courses.select(["Slug", "Name", "Syllabus"]).getAll()
-  ).map(({ Slug, Name, Syllabus }) => ({
+    await xata.db.Courses.select(["Slug", "Name", "Syllabus","Overview"]).getAll()
+  ).map(({ Slug, Name, Syllabus,Overview }) => ({
     params: { slug: Slug },
-    props: { Name, Syllabus },
+    props: { Name, Syllabus,Overview },
   }))
 }
-const { Name, Syllabus } = Astro.props as {
+const { Name, Syllabus,Overview } = Astro.props as {
   Name: string
+  Overview: string
   Syllabus: {
     semesters: {
       subjects: {
@@ -26,19 +27,96 @@ const { Name, Syllabus } = Astro.props as {
 
 <Layout title={Name}>
   <div class="container">
-    <h2 class="heading" transition:name={`Title_${Name}`}>{Name}</h2>
-    {
-      Syllabus &&
-        Syllabus.semesters.map(({ subjects }, index) => (
-          <div style="margin-top: 1rem;">
-            <h3 style="color: CanvasText;">Semester - {index + 1}</h3>
-            {subjects.map(({ code, name }) => (
-              <p style="display: flex; gap: 0.3rem;">
-                <span>{code}</span> - <span>{name}</span>
-              </p>
-            ))}
-          </div>
-        ))
-    }
+    <div data-aos="fade-up" class="text-center top">
+      <h1 class="heading" data-aos="fade-up">{Name}</h1>
+      {Overview&&
+        <strong>Curriculum Overview</strong>
+        <p>{Overview}</p>
+      }
+    </div>
+      {
+        Syllabus &&
+          Syllabus.semesters.map(({ subjects }, index) => (
+            <div class="course">
+              <div class="courseTitle">
+                <b>{index + 1}</b>
+                <div>
+                  <strong>Semester - {index + 1}</strong>
+                  <p>{subjects.length} Core Subjects</p>
+                </div>
+              </div>
+              <div class="grid">
+                {subjects.map(({ code, name }, index) => (
+                  <div class="subject" data-aos={index%2!==0?"fade-left":"fade-right"}>
+                    <strong class="tag">{code}</strong>
+                    <p><b>{name}</b></p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+      }
   </div>
 </Layout>
+
+<style>
+  .top{
+    margin-bottom: 5rem;
+
+    strong{
+      color: CanvasText;
+      font-size: 1.5rem;
+    }
+    p{
+      max-width: 64ch;
+      margin-inline: auto;
+    }
+  }
+  .course{
+    margin-bottom: 2rem;
+
+    .courseTitle{
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      strong{
+        color: CanvasText;
+      }
+      b{
+        width: 4rem;
+        line-height: 4rem;
+        font-size: 2rem;
+        border-radius: 1rem;
+        text-align: center;
+        background: var(--accent);
+        color: #fff;
+      }
+
+    }
+  }
+  .subject{
+    padding: 2rem;
+    border-radius: .5rem;
+    border: 1px solid var(--border);
+    background: var(--accent-opaque);
+
+    .tag{
+      display: inline-block;
+      border-radius: 99px;
+      padding: 0.2rem 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    b{
+      color: CanvasText;
+    }
+  }
+  .grid{
+    grid-template-columns: repeat(2,minmax(0, 1fr));
+    @media (max-width: 768px) {
+      grid-template-columns: unset;
+    }
+  }
+</style>

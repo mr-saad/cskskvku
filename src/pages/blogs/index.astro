@@ -1,52 +1,105 @@
 ---
+import { Image } from "astro:assets"
 import Layout from "../../layouts/Layout.astro"
 const blogs = await Astro.glob("./*.md")
 ---
 
 <Layout title="Blogs">
   <div class="container">
-    <h2 class="heading">Blogs</h2>
-    {
-      blogs.map(({ frontmatter, url }) => (
-        <a href={url} class="blog">
-          <h3>{frontmatter.title}</h3>
-          <p class="date">{frontmatter.date}</p>
-          <p class="description">{frontmatter.description}</p>
-        </a>
-      ))
-    }
+    <h2 class="heading">Recent Posts</h2>
+    <div class="grid">
+      {
+        blogs.map(({ frontmatter, url }) => (
+          <a href={url} class="blog">
+            <div class="imgWrapper">
+              <Image width={300} height={300} src={frontmatter.coverImage} alt={frontmatter.title} />
+            </div>
+            <div class="details">
+              <div class="tags">
+                <span class="tag">{frontmatter.tag}</span>
+                <span>{frontmatter.readTime} read</span>
+              </div>
+              <strong class="title">{frontmatter.title}</strong>
+              <p class="description">{frontmatter.description}</p>
+              <p class="date">{frontmatter.date}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
   </div>
 </Layout>
 
 <style>
+  .grid{
+    gap: 2rem;
+    grid-template-columns: repeat(3,minmax(0, 1fr));
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2,minmax(0, 1fr));
+    }
+    @media (max-width: 640px) {
+      grid-template-columns: unset;
+    }
+  }
   .blog {
     display: block;
     text-decoration: none;
     color: currentColor;
     margin-bottom: 1.5rem;
     transition: color var(--transition);
-  }
-  .blog h3 {
-    width: fit-content;
-    color: CanvasText;
-    transition: var(--transition);
-  }
-
-  .blog:hover {
-    color: var(--accent);
-    h3{
-      text-decoration: underline;
-      border-bottom-width: 1px;
-    }
-  }
-  .blog .date {
-    font-size: small;
-  }
-  .blog .description {
+    box-shadow: 0 5px 1rem rgba(0,0,0,0.1);
+    border-radius: .5rem;
     overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    transition: var(--transition);
+    &:hover{
+      box-shadow: 0 5px 1rem rgba(0,0,0,0.2);
+
+      img{
+        scale: 1.03;
+      }
+    }
+    .imgWrapper{
+      overflow: hidden;
+      height: 300px;
+      img{
+        will-change: scale;
+        width: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+    }
+    .details{
+      padding: 1.5rem;
+    }
+    .tags{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      .tag{
+        color: #fff;
+        background: var(--accent);
+        padding: 0 .6rem;
+        border-radius: 99px;
+      }
+    }
+    .title {
+      color: CanvasText;
+      transition: var(--transition);
+    }
+    &:hover .title{
+      color: var(--accent);
+    }
+    .description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .date {
+      margin-top: 1rem;
+      font-size: small;
+    }
   }
 </style>

@@ -3,6 +3,7 @@ import { ClientRouter  } from "astro:transitions"
 import Navbar from "../components/Navbar.astro"
 import Footer from "../components/Footer.astro"
 import "../globals.css"
+import { Image } from "astro:assets"
 const { frontmatter } = Astro.props
 ---
 
@@ -13,8 +14,9 @@ const { frontmatter } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{frontmatter.title} | CS KSKVKU Blogs</title>
     <script is:inline>
-       document.documentElement.classList.toggle("dark", localStorage.getItem("theme") === "dark")
+       document.documentElement.classList.add("dark", localStorage.getItem("theme") === "dark")
     </script>
+    <script is:inline src="https://unpkg.com/lenis@1.3.3/dist/lenis.min.js"></script>
     <script defer src="/navEvents.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,30 +26,94 @@ const { frontmatter } = Astro.props
   </head>
   <body>
     <Navbar />
-    <main style="min-height: 85vh; padding-block: 1rem;">
+    <main style="min-height: 85vh">
       <div class="container blog_container">
-        <h2 class="heading">{frontmatter.title}</h2>
-        <p style="font-size: small;">{frontmatter.date}</p>
-        <p>{frontmatter.description}</p>
-
-        <div class="content">
-          <slot />
+        <Image class="cover" width={400} height={300} src={frontmatter.coverImage} alt={frontmatter.title} />
+        <div class="details">
+          <div class="flex">
+            <span class="tag">{frontmatter.tag}</span><span>{frontmatter.date}</span>•<span>{frontmatter.readTime} read</span>•<span>By {frontmatter.author}</span>
+          </div>
+          <h2 class="heading" style="margin-bottom: 0;">{frontmatter.title}</h2>
+          <p>{frontmatter.description}</p>
+          <div class="content">
+            <slot />
+          </div>
         </div>
       </div>
     </main>
     <Footer />
   </body>
   <style is:global>
-    .blog_container h1,
-    .blog_container h2,
-    .blog_container h3,
-    .blog_container h4,
-    .blog_container h5,
-    .blog_container h6 {
-      color: var(--accent);
+    .blog_container{
+      margin-top: 5rem;
+      padding: unset;
+      max-width: 75ch;
+      border-radius: 1rem;
+      box-shadow: 0 5px 1rem rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+
+      @media (max-width: 768px) {
+          margin-top: 2rem;
+      }
+
+      h1,h2,h3,h4,h5,h6 {
+        color: var(--accent);
+      }
+      .details{
+        padding: 2rem;
+        @media (max-width: 768px) {
+          padding: 1.5rem;
+        }
+        .flex{
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          margin-bottom: 1.5rem;
+          .tag{
+            padding: 0 0.6rem;
+            color: #fff;
+            background: var(--accent);
+            border-radius: 99px;
+          }
+        }
+      }
+      .cover{
+        width: 100%;
+        object-fit: cover;
+      }
     }
     .content {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      p{
+        margin-bottom: 1.5rem;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        object-fit: cover;
+        border-radius: .3rem;
+        margin-block-end: 1rem;
+
+        &[center]{
+          margin-inline: auto;
+        }
+        &[left]{
+          margin-inline-end: auto;
+        }
+        &[right]{
+          margin-inline-start: auto;
+        }
+        @media screen and (max-width: 768px) {
+          &[autoheight]{
+            height: auto;
+          }
+        }
+      }
+    }
+    @media  (max-width: 768px) {
+      main{
+        padding-inline: 1rem;
+      }
     }
   </style>
 </html>

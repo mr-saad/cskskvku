@@ -1,0 +1,47 @@
+ ---
+import { xata } from "../xata"
+import "../styles/newsAndEvents.css"
+
+const limit = Astro.props.count ? {pagination:{size: Astro.props.count}} : {}
+const events = await xata.db.NewsAndEvents.select(["Slug","Tags","Title","Description"]).filter({Type:"Event"}).getMany(limit)
+ ---
+ <section
+    id="events"
+    class="container"
+  >
+    <div class="headingTop">
+      <h2 class="heading">Events</h2>
+      {
+        Astro.url.pathname === "/" && <a href="/events">More</a>
+      }
+    </div>
+    <div class="grid">
+      {
+        events.map(({ Title, Description, Slug ,Tags, xata}, index) => (
+          <div class="news" data-aos={index%2!==0 ?"fade-left":"fade-right"}>
+            <div class="top">
+              <div class="tags">
+                {Tags.map(tag=>(
+                  <span>{tag}</span>
+                ))}
+              </div>
+              <span>{new Date(xata.createdAt).toLocaleDateString()}</span>
+            </div>
+            <h3>{Title}</h3>
+            <p>{Description}</p>
+            <a class="btn" href={`/events/${Slug}`}>
+              Explore
+            </a>
+          </div>
+        ))
+      }
+    </div>
+ </section>
+<style>
+  .grid{
+    grid-template-columns: 1fr 1fr;
+    @media screen and (max-width: 768px){
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
