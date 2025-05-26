@@ -5,12 +5,12 @@ const blogs = await Astro.glob("./*.md")
 ---
 
 <Layout title="Blogs">
-  <div class="container">
+  <div class="container" style="padding-inline: unset;">
     <h2 class="heading">Recent Posts</h2>
     <div class="grid">
       {
         blogs.map(({ frontmatter, url }) => (
-          <a href={url} class="blog">
+          <a data-aos="fade-up" href={url} class="blog">
             <div class="imgWrapper">
               <Image width={300} height={300} src={frontmatter.coverImage} alt={frontmatter.title} />
             </div>
